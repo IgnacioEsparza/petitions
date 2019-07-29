@@ -15,7 +15,7 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
-import IncidenciaData from '../../Data/Incidencia';
+import IncidenciaData from '../../Data/Propuestas';
 
 var blueColor = '#4b85eb';
 var grayColor = '#494949';
@@ -60,12 +60,12 @@ export default class Propuestas_Main extends Component {
 
             < View style={styles.listStyleRow} >
               <IconMaterial name={data.icon} color={grayColor} size={20} />
-              <Text style={styles.typePetitionStyle}>{data.incidente}</Text>
+              <Text style={styles.typePetitionStyle}>{data.categoria}</Text>
             </View>
 
             <View style={styles.listStyle} >
               <View style={{ height: lineHeight, width: "100%", backgroundColor: blueColor }} />
-              <Text style={styles.titleTextStyle}>Recuperen la Facultad de Medicina UdeC</Text>
+              <Text style={styles.titleTextStyle}>{data.title}</Text>
               <View style={{ height: lineHeight, width: "60%", backgroundColor: blueColor }} />
               <Text style={styles.infoTextStyle}>{data.descripcion}</Text>
               <View style={{ height: lineHeight, width: "100%", backgroundColor: blueColor }} />
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     // elevation: 2,
   },
 
-  titleTextStyle:{
+  titleTextStyle: {
     fontSize: 20,
     fontStyle: 'normal',
     marginTop: 5,
@@ -177,14 +177,15 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     marginTop: 5,
     marginBottom: 10,
-    color: grayColor
+    color: grayColor,
+    textAlign: 'justify',
   },
 
   typePetitionStyle: {
     fontSize: 18,
     color: grayColor,
     marginBottom: 5,
-    marginLeft: 20,
+    marginLeft: 10,
   },
 
   addInfoTextStyle: {
@@ -198,6 +199,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     marginLeft: 12,
+    marginEnd:10,
     justifyContent: 'center',
   },
 
@@ -205,11 +207,12 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 12,
     flexDirection: 'row',
+    marginBottom: 5,
   },
 
   listStyleRowAdd: {
-    flex:1,
-    alignItems:'center'
+    flex: 1,
+    alignItems: 'center'
   },
 
   RowContainer: {
