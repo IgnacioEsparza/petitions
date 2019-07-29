@@ -17,6 +17,8 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
 import IncidenciaData from '../../Data/Incidencia';
 
+var blueColor = '#4b85eb';
+var grayColor = '#494949';
 
 export default class Propuestas_Main extends Component {
 
@@ -46,20 +48,37 @@ export default class Propuestas_Main extends Component {
   // };
 
 
+
   parseData() {
+
+    var lineHeight = 1;
 
     if (this.state.list) {
       return this.state.list.map((data, i) => {
         return (
           <View key={i} style={styles.listContainer}>
 
-            <IconMaterial name={data.icon} color='#000' size={40} style={{ top: 10 }} />
+            < View style={styles.listStyleRow} >
+              <IconMaterial name={data.icon} color={grayColor} size={20} />
+              <Text style={styles.typePetitionStyle}>{data.incidente}</Text>
+            </View>
 
-            < View style={styles.listStyle} >
-              <Text style={{ fontSize: 16, color: '#000', marginBottom: 5 }}>{data.incidente}</Text>
-              <View style={{ height: 0.7, width: "100%", backgroundColor: '#648a64' }} />
-              <Text style={{ fontSize: 11, fontStyle: 'italic', marginTop: 5 }}>{data.direccion}</Text>
-              <View style={[styles.stateStyle, { backgroundColor: data.estado }]} />
+            <View style={styles.listStyle} >
+              <View style={{ height: lineHeight, width: "100%", backgroundColor: blueColor }} />
+              <Text style={styles.titleTextStyle}>Recuperen la Facultad de Medicina UdeC</Text>
+              <View style={{ height: lineHeight, width: "60%", backgroundColor: blueColor }} />
+              <Text style={styles.infoTextStyle}>{data.descripcion}</Text>
+              <View style={{ height: lineHeight, width: "100%", backgroundColor: blueColor }} />
+            </View>
+
+            < View style={styles.RowContainer} >
+              <View style={styles.listStyleRowAdd}>
+                <Text style={styles.addInfoTextStyle}>{data.direccion}</Text>
+              </View>
+              <View style={styles.listStyleRowAdd}>
+                <Text style={styles.addInfoTextStyle}>Votos: 99</Text>
+              </View>
+
             </View>
 
             {/* <TouchableOpacity onPress={() => { ToastAndroid.show(data.incidente, ToastAndroid.SHORT); }}
@@ -70,7 +89,7 @@ export default class Propuestas_Main extends Component {
               style={styles.buttonListStyles}>
             </TouchableOpacity >
 
-          </View>
+          </View >
         )
       })
     }
@@ -90,7 +109,7 @@ export default class Propuestas_Main extends Component {
           </ScrollView>
 
         </View>
-        
+
       </View>
     );
   }
@@ -127,36 +146,11 @@ const styles = StyleSheet.create({
     right: 20,
   },
 
-  buttonInfo: {
-    width: 30,
-    height: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#333',
-    shadowOpacity: .1,
-    shadowOffset: { x: 2, y: 0 },
-    shadowRadius: 2,
-    borderRadius: 30,
-    position: 'absolute',
-    bottom: 100,
-    right: 35,
-    backgroundColor: '#006064'
-  },
-
-  insertar: {
-    backgroundColor: '#8c8c8c'
-  },
-
-  textoInsertar: {
-    backgroundColor: '#ffffff',
-    fontSize: 15,
-  },
-
   // Estilos de Lista
 
   listContainer: {
     flex: 1,
-    flexDirection: 'row',
+    // flexDirection: 'row',
     padding: 10,
     marginLeft: 16,
     marginRight: 16,
@@ -164,7 +158,40 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     borderRadius: 5,
     backgroundColor: '#FFF',
-    elevation: 2,
+    borderColor: '#4b85eb',
+    borderWidth: 2,
+    // elevation: 2,
+  },
+
+  titleTextStyle:{
+    fontSize: 20,
+    fontStyle: 'normal',
+    marginTop: 5,
+    marginBottom: 10,
+    color: grayColor
+
+  },
+
+  infoTextStyle: {
+    fontSize: 18,
+    fontStyle: 'normal',
+    marginTop: 5,
+    marginBottom: 10,
+    color: grayColor
+  },
+
+  typePetitionStyle: {
+    fontSize: 18,
+    color: grayColor,
+    marginBottom: 5,
+    marginLeft: 20,
+  },
+
+  addInfoTextStyle: {
+    fontSize: 11,
+    fontStyle: 'italic',
+    marginTop: 5,
+    color: grayColor,
   },
 
   listStyle: {
@@ -172,6 +199,23 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginLeft: 12,
     justifyContent: 'center',
+  },
+
+  listStyleRow: {
+    flex: 1,
+    marginLeft: 12,
+    flexDirection: 'row',
+  },
+
+  listStyleRowAdd: {
+    flex:1,
+    alignItems:'center'
+  },
+
+  RowContainer: {
+    flex: 1,
+    marginLeft: 12,
+    flexDirection: 'row',
   },
 
   stateStyle: {
@@ -189,7 +233,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0
-  }
+  },
 
 });
 

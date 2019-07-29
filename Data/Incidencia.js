@@ -11,6 +11,7 @@ var incidencia = [
         id: 0,
         incidente: 'Micro Basural',
         direccion: 'Diego Portales 806',
+        descripcion: 'La Facultad de Medicina fue tomada el día jueves 04 de Julio de 2019, por tercera vez en cuatro años, por un grupo de 133 estudiantes autodenominado "Asamblea de Facultad..',
         estado: aceptado,
         imagen: 'basural.jpg',
         icon: 'delete-sweep',
@@ -20,6 +21,7 @@ var incidencia = [
         id: 1,
         incidente: 'Mobiliario Urbano en Mal Estado',
         direccion: 'Arturo Prat 725',
+        descripcion:'Las comunidades, asociaciones, organizaciones de la sociedad civil, ciudadanos conscientes, exigimos la salida inmediata del Comando Jungla de la Región de La Araucanía...',
         estado: proceso,
         imagen: '',
         icon: 'seat',
@@ -29,11 +31,12 @@ var incidencia = [
         id: 2,
         incidente: 'Mobiliario Urbano en Mal Estado',
         direccion: 'Plaza Anibal Pinto',
+        descripcion:'Por casi 60 años esta zona ha sido inescrupulosamente contaminada con diferentes elementos tóxicos que emanan de la veintena de industrias situadas en la bahía de Quintero...',
         estado: rechazado,
         imagen: '',
         icon: 'seat',
         fecha: '30 de Octubre 2056'
-    }
+    },
 ];
 
 module.exports = incidencia;

@@ -20,16 +20,16 @@ export default class Mas_Main extends Component {
 
   render() {
 
-    var iconSize = 30;
-    var iconColor ='#4b85eb'
+    var iconSize = 20;
+    var iconColor = '#4b85eb'
 
     return (
       <View style={styles.MainContainer}>
 
         <View >
           <TouchableOpacity>
-            <Text style={styles.textStyle}>CUENTA</Text>
-            <Icon name='ios-archive' size={iconSize} color={iconColor} style={styles.iconStyle}></Icon>
+            <Text style={styles.textStyleMain}>CUENTA</Text>
+            <Icon name='md-contact' size={30} color={iconColor} style={styles.iconStyle}></Icon>
           </TouchableOpacity>
         </View>
 
@@ -87,8 +87,8 @@ const styles = StyleSheet.create({
   },
 
   lineaOptionStyle: {
-    height: 0.9,
-    width: "90%",
+    height: 0.5,
+    width: "80%",
     backgroundColor: '#4b85eb'
   },
 
@@ -101,6 +101,12 @@ const styles = StyleSheet.create({
   },
 
   textStyle: {
+    fontSize: 15,
+    color: '#4b85eb',
+    paddingLeft: 50,
+  },
+
+  textStyleMain: {
     fontSize: 20,
     color: '#4b85eb',
     paddingLeft: 50,
