@@ -14,7 +14,7 @@ var incidencia = [
         title:'Recuperen la Facultad de Medicina UdeC',
         categoria: list[4].category,
         direccion: 'Diego Portales 806',
-        descripcion: 'La Facultad de Medicina fue tomada el día jueves 04 de Julio de 2019, por tercera vez en cuatro años, por un grupo de 133 estudiantes autodenominado "Asamblea de Facultad..',
+        descripcion: 'La Facultad de Medicina fue tomada el día jueves 04 de Julio de 2019, por tercera vez en cuatro años, por un grupo de 133 estudiantes autodenominado "Asamblea de Facultad..La Facultad de Medicina fue tomada el día jueves 04 de Julio de 2019, por tercera vez en cuatro años, por un grupo de 133 estudiantes autodenominado "Asamblea de Facultad..La Facultad de Medicina fue tomada el día jueves 04 de Julio de 2019, por tercera vez en cuatro años, por un grupo de 133 estudiantes autodenominado "Asamblea de Facultad..',
         estado: aceptado,
         imagen: 'basural.jpg',
         icon: list[4].icon,

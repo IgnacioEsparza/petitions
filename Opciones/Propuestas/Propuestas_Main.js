@@ -21,16 +21,21 @@ var blueColor = '#4b85eb';
 var grayColor = '#494949';
 var lineHeight = 1;
 
-export default class Propuestas_Main extends Component {
+class Propuestas_Main extends Component {
 
   static navigationOptions = {
-    title: 'Estado de Incidencias',
+    title: 'Propuestas',
     headerStyle: {
-      backgroundColor: '#648a64',
+      backgroundColor: '#ffffff',
+      elevation: 1,
+      shadowOpacity: 0,
+      height: 40
     },
     headerTitleStyle: {
-      color: '#FFFFFF'
-    }
+      color: grayColor,
+      fontSize: 16
+    },
+    // header: null
   }
 
   constructor() {
@@ -56,8 +61,6 @@ export default class Propuestas_Main extends Component {
   };
 
   parseData() {
-
-
 
     if (this.state.list) {
       return this.state.list.map((data, i) => {
@@ -91,7 +94,7 @@ export default class Propuestas_Main extends Component {
               style={styles.buttonListStyles}>
             </TouchableOpacity > */}
 
-            <TouchableOpacity onPress={() => { this.props.navigation.navigate('Seg', { data: data }) }}
+            <TouchableOpacity onPress={() => { this.props.navigation.navigate('Ext', { data: data }) }}
               style={styles.buttonListStyles}>
             </TouchableOpacity >
 
@@ -157,16 +160,12 @@ export default class Propuestas_Main extends Component {
 
       <View style={styles.MainContainer}>
 
-        <View style={styles.FragmentStyle}>
-
-          <ScrollView>
-            {this.selectType()}
-            <View>
-              {this.parseData()}
-            </View>
-          </ScrollView>
-
-        </View>
+        <ScrollView>
+          {this.selectType()}
+          <View>
+            {this.parseData()}
+          </View>
+        </ScrollView>
 
       </View>
     );
@@ -330,17 +329,11 @@ const styles = StyleSheet.create({
 });
 
 
-// import Ingresar from './Ingresar_nav';
-// import EstadoSeguimiento from './Seg_estado';
-// import IngresarCam from './Ingresar_cam';
-// import Informacion from '../configuracion/Informacion';
+import pExtendida from './Propuesta_Extend';
 
-// const AppNavigator = createStackNavigator({
-//   Inicio: { screen: Seguimiento_nav },
-//   Ing: { screen: Ingresar },
-//   Seg: { screen: EstadoSeguimiento },
-//   Cam: { screen: IngresarCam },
-//   Inf: { screen: Informacion},
-// });
+const AppNavigator = createStackNavigator({
+  Inicio: { screen: Propuestas_Main },
+  Ext: { screen: pExtendida },
+});
 
-// export default createAppContainer(AppNavigator);
+export default createAppContainer(AppNavigator);
