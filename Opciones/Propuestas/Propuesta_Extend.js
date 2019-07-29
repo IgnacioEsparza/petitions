@@ -6,7 +6,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 var grayColor = '#494949';
 var blueColor = '#4b85eb';
 var marginLeftGlobal = 20;
-const { width: WIDTH } = Dimensions.get('window');
 
 export default class Propuesta_Extend extends Component {
 
@@ -30,7 +29,7 @@ export default class Propuesta_Extend extends Component {
         return (
             <View style={styles.MainContainer}>
 
-                <View style={{ flex: 13 }}>
+                <View style={{ flex: 20 }}>
                     <View style={styles.titleContainer}>
                         <Text style={styles.titleTextStyle}>{proposal.title}</Text>
                     </View>
@@ -42,7 +41,7 @@ export default class Propuesta_Extend extends Component {
                     </View>
                 </View>
 
-                <View style={{ flex: 82 }}>
+                <View style={{ flex: 75 }}>
 
                     <ScrollView>
 
@@ -63,6 +62,10 @@ export default class Propuesta_Extend extends Component {
                 </View>
 
                 <View style={styles.btnContainer}>
+
+                    <View style={styles.upVoteStyle}>
+                        <Text>156 / 2000 Votos </Text>
+                    </View>
 
                     <TouchableOpacity style={styles.upVoteStyle}>
                         <Text><Icon name='md-arrow-dropdown-circle' color='red' size={40}></Icon></Text>
