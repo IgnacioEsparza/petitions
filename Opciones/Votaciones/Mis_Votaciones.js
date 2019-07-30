@@ -7,7 +7,7 @@ var grayColor = '#494949';
 var blueColor = '#4b85eb';
 var marginLeftGlobal = 20;
 
-export default class Propuesta_Extend extends Component {
+export default class Mis_Votaciones extends Component {
 
     static navigationOptions = {
         title: 'Más Información',
@@ -24,37 +24,12 @@ export default class Propuesta_Extend extends Component {
         // header: null
     }
 
-    constructor() {
-        super()
-        this.state = {
-            vote: true,
-            pressUp: false,
-            pressDown: false,
-        };
-    }
-
-    votingUp = () => {
-        this.setState({ vote: !this.state.vote, pressUp: !this.state.pressUp });
-
-        if (this.state.pressDown) {
-            this.setState({ vote: !this.state.vote, pressDown: !this.state.pressDown });
-        }
-    }
-
-    votingDown = () => {
-        this.setState({ vote: !this.state.vote, pressDown: !this.state.pressDown });
-
-        if (this.state.pressUp) {
-            this.setState({ vote: !this.state.vote, pressUp: !this.state.pressUp });
-        }
-    }
-
     render() {
         var proposal = this.props.navigation.state.params.data;
         return (
             <View style={styles.MainContainer}>
                 <View style={{ flex: 90 }}>
-
+                    
                     <ScrollView>
 
                         <View style={styles.titleContainer}>
@@ -89,12 +64,12 @@ export default class Propuesta_Extend extends Component {
                         <Text>156 / 2000 Votos </Text>
                     </View>
 
-                    <TouchableOpacity style={styles.upVoteStyle} onPress={this.votingDown.bind(this)} >
-                        <Text><Icon name='md-arrow-dropdown-circle' color={!this.state.pressDown ? grayColor : 'red'} size={40}></Icon></Text>
+                    <TouchableOpacity style={styles.upVoteStyle}>
+                        <Text><Icon name='md-arrow-dropdown-circle' color='red' size={40}></Icon></Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.upVoteStyle} onPress={this.votingUp.bind(this)}>
-                        <Text><Icon name='md-arrow-dropup-circle' color={!this.state.pressUp ? grayColor : blueColor} size={40}></Icon></Text>
+                    <TouchableOpacity style={styles.upVoteStyle}>
+                        <Text><Icon name='md-arrow-dropup-circle' color={blueColor} size={40}></Icon></Text>
                     </TouchableOpacity>
 
                 </View>
