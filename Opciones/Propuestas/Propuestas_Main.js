@@ -1,21 +1,11 @@
 
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  View,
-  Animated,
-  TouchableOpacity,
-  ScrollView,
-  Text,
-  ToastAndroid,
-  FlatList
-} from 'react-native';
-
+import { StyleSheet, View, Animated, TouchableOpacity, ScrollView, Text, ToastAndroid, FlatList, RefreshControl } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-
 import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
 import IncidenciaData from '../../Data/Propuestas';
 import PropuestasTipo from '../../Data/Categorias';
+import _ from 'lodash';
 
 var blueColor = '#4b85eb';
 var grayColor = '#494949';
@@ -35,15 +25,16 @@ class Propuestas_Main extends Component {
       color: grayColor,
       fontSize: 16
     },
-    // header: null
   }
 
   constructor() {
     super()
     this.state = {
       list: IncidenciaData,
+      fullList: IncidenciaData,
       listType: PropuestasTipo,
       showDetail: false,
+      refreshing: false,
       proposalType: 'Filtrar Categoría',
     }
   }
@@ -52,13 +43,22 @@ class Propuestas_Main extends Component {
     animation: new Animated.Value(0)
   }
 
-  // ingresarIncidenciaBtn = () => {
-  //   this.props.navigation.navigate('Ing')
-  // };
-
   ShowDetail = () => {
     this.setState({ showDetail: !this.state.showDetail });
   };
+
+  _onRefresh = () => {
+    this.setState({ refreshing: !this.state.refreshing})
+  }
+
+  search(txt) {
+    let filterTracks = this.state.fullList.filter(item => {
+      if (item.categoria.toLowerCase().match(txt.toLowerCase())) {
+        return item
+      }
+    })
+    this.setState({ list: this.state.list = filterTracks })
+  }
 
   parseData() {
 
@@ -106,7 +106,7 @@ class Propuestas_Main extends Component {
 
   selectType() {
     return (
-      <TouchableOpacity onPress={() => this.ShowDetail()}>
+      <TouchableOpacity onPress={() => { this.ShowDetail(); this.search(this.state.proposalType) }}>
 
         < View style={styles.typeRowStyle} >
           <Text style={styles.typeSelectorStyle}>{this.state.proposalType}</Text>
@@ -134,7 +134,7 @@ class Propuestas_Main extends Component {
 
                       <TouchableOpacity onPress={() => {
                         this.setState({ proposalType: this.state.proposalType = item.category });
-                        this.ShowDetail()
+                        this.ShowDetail();
                       }}
                         style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 }}>
                       </TouchableOpacity >
