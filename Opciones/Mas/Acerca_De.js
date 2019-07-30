@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 var blueColor = '#4b85eb';
 var grayColor = '#494949';
@@ -24,9 +24,28 @@ export default class Acerca_De extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <Text>Acerca de</Text>
+                <View style={styles.textContainer}>
+                    <Text style={styles.labelStyle}>Proyecto Propuestas Municipales</Text>
+                    <Text style={styles.labelStyle}>Smart Araucanía © 2019</Text>
+                </View>
             </View>
         );
     }
 
 }
+
+const styles = StyleSheet.create({
+
+    textContainer: {
+        alignItems: 'center',
+        backgroundColor: '#FFFFFF',
+        marginBottom: 20,
+        marginTop: 30
+    },
+
+    labelStyle: {
+        fontSize: 12,
+        color: '#000000',
+    },
+
+});

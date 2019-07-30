@@ -57,10 +57,7 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     padding: 10,
   },
-  labelStyle: {
-    fontSize: 12,
-    color: '#000000',
-  },
+  
   textContainer: {
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
