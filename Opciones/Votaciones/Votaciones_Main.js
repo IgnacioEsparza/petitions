@@ -10,16 +10,21 @@ var blueColor = '#4b85eb';
 var grayColor = '#494949';
 var lineHeight = 1;
 
-export default class Votaciones_Main extends Component {
+class Votaciones_Main extends Component {
 
     static navigationOptions = {
-        title: 'Estado de Incidencias',
+        title: 'Mis Votaciones',
         headerStyle: {
-            backgroundColor: '#648a64',
+            backgroundColor: '#ffffff',
+            elevation: 1,
+            shadowOpacity: 0,
+            height: 40
         },
         headerTitleStyle: {
-            color: '#FFFFFF'
-        }
+            color: grayColor,
+            fontSize: 16
+        },
+        // header: null
     }
 
     constructor() {
@@ -68,7 +73,7 @@ export default class Votaciones_Main extends Component {
                                 <Text style={styles.addInfoTextStyle}>Votos: 99</Text>
                             </View>
                         </View>
-                        <TouchableOpacity onPress={() => { this.props.navigation.navigate('Seg', { data: data }) }}
+                        <TouchableOpacity onPress={() => { this.props.navigation.navigate('Vot', { data: data }) }}
                             style={styles.buttonListStyles}>
                         </TouchableOpacity >
                     </View >
@@ -97,7 +102,8 @@ export default class Votaciones_Main extends Component {
                                         </View >
                                         <TouchableOpacity onPress={() => {
                                             this.setState({ proposalType: this.state.proposalType = item.category });
-                                            this.ShowDetail()}}
+                                            this.ShowDetail()
+                                        }}
                                             style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 }}>
                                         </TouchableOpacity >
                                     </View >);
@@ -234,17 +240,11 @@ const styles = StyleSheet.create({
     },
 });
 
-// import Ingresar from './Ingresar_nav';
-// import EstadoSeguimiento from './Seg_estado';
-// import IngresarCam from './Ingresar_cam';
-// import Informacion from '../configuracion/Informacion';
+import misVotaciones from './Mis_Votaciones';
 
-// const AppNavigator = createStackNavigator({
-//   Inicio: { screen: Seguimiento_nav },
-//   Ing: { screen: Ingresar },
-//   Seg: { screen: EstadoSeguimiento },
-//   Cam: { screen: IngresarCam },
-//   Inf: { screen: Informacion},
-// });
+const AppNavigator = createStackNavigator({
+    Inicio: { screen: Votaciones_Main },
+    Vot: { screen: misVotaciones },
+});
 
-// export default createAppContainer(AppNavigator);
+export default createAppContainer(AppNavigator);
