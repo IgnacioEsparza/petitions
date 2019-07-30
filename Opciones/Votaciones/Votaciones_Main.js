@@ -31,6 +31,7 @@ class Votaciones_Main extends Component {
         super()
         this.state = {
             list: IncidenciaData,
+            fullList: IncidenciaData,
             listType: PropuestasTipo,
             showDetail: false,
             proposalType: 'Filtrar Categoría',
@@ -44,6 +45,19 @@ class Votaciones_Main extends Component {
     // ingresarIncidenciaBtn = () => {
     //   this.props.navigation.navigate('Ing')
     // };
+
+    search(txt) {
+        if (txt == 'Todos') {
+            this.setState({ list: this.state.list = this.state.fullList })
+        } else {
+            let filterTracks = this.state.fullList.filter(item => {
+                if (item.categoria.toLowerCase().match(txt.toLowerCase())) {
+                    return item
+                }
+            })
+            this.setState({ list: this.state.list = filterTracks })
+        }
+    }
 
     ShowDetail = () => {
         this.setState({ showDetail: !this.state.showDetail });
@@ -102,6 +116,7 @@ class Votaciones_Main extends Component {
                                         </View >
                                         <TouchableOpacity onPress={() => {
                                             this.setState({ proposalType: this.state.proposalType = item.category });
+                                            this.search(this.state.proposalType);
                                             this.ShowDetail()
                                         }}
                                             style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 }}>
