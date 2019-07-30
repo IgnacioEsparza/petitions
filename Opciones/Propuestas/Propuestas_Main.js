@@ -34,7 +34,6 @@ class Propuestas_Main extends Component {
       fullList: IncidenciaData,
       listType: PropuestasTipo,
       showDetail: false,
-      refreshing: false,
       proposalType: 'Filtrar Categoría',
     }
   }
@@ -46,10 +45,6 @@ class Propuestas_Main extends Component {
   ShowDetail = () => {
     this.setState({ showDetail: !this.state.showDetail });
   };
-
-  _onRefresh = () => {
-    this.setState({ refreshing: !this.state.refreshing})
-  }
 
   search(txt) {
     let filterTracks = this.state.fullList.filter(item => {
@@ -65,7 +60,7 @@ class Propuestas_Main extends Component {
     if (this.state.list) {
       return this.state.list.map((data, i) => {
         return (
-          <View key={i} style={styles.listContainer}>
+          <View key={i} style={styles.listContainer} >
 
             < View style={styles.listStyleRow} >
               <IconMaterial name={data.icon} color={grayColor} size={20} />
@@ -106,7 +101,7 @@ class Propuestas_Main extends Component {
 
   selectType() {
     return (
-      <TouchableOpacity onPress={() => { this.ShowDetail(); this.search(this.state.proposalType) }}>
+      <TouchableOpacity onPress={() => { this.ShowDetail() }}>
 
         < View style={styles.typeRowStyle} >
           <Text style={styles.typeSelectorStyle}>{this.state.proposalType}</Text>
@@ -133,7 +128,9 @@ class Propuestas_Main extends Component {
                       </View >
 
                       <TouchableOpacity onPress={() => {
+
                         this.setState({ proposalType: this.state.proposalType = item.category });
+                        this.search(this.state.proposalType);
                         this.ShowDetail();
                       }}
                         style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 }}>
