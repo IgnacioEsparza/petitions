@@ -71,7 +71,7 @@ class Mas_Main extends Component {
         </View>
 
         <View >
-          <TouchableOpacity>
+          <TouchableOpacity  onPress={() => { this.props.navigation.navigate('Acerca') }}>
             <Text style={styles.textStyle}>Acerca de</Text>
             <Icon name='ios-help-circle' size={iconSize} color={grayColor} style={styles.iconStyle}></Icon>
           </TouchableOpacity>
@@ -82,7 +82,7 @@ class Mas_Main extends Component {
         </View>
 
         <View >
-          <TouchableOpacity >
+          <TouchableOpacity  onPress={() => { this.props.navigation.navigate('Info') }}>
             <Text style={styles.textStyle}>Información</Text>
             <Icon name='md-information-circle' size={iconSize} color={grayColor} style={styles.iconStyle}></Icon>
           </TouchableOpacity>
@@ -153,12 +153,16 @@ const styles = StyleSheet.create({
 import Account_nav from './User/Account_nav';
 import Log_in from './User/Log_in';
 import Check_in from './User/Check_in';
+import Acerca_de from './Acerca_De';
+import Informacion from './Informacion';
 
 const AppNavigator = createStackNavigator({
   Inicio: { screen: Mas_Main },
   Account: { screen: Account_nav },
   Login: { screen: Log_in },
   Checkin: { screen: Check_in },
+  Acerca: { screen: Acerca_de },
+  Info: { screen: Informacion },
 });
 
 export default createAppContainer(AppNavigator);
