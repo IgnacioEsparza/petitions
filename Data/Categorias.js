@@ -29,6 +29,11 @@ var categorias = [
         category: 'Otros',
         icon: 'bandage'
     },
+    {
+        id: 6,
+        category: 'Todos',
+        icon: 'apps'
+    },
 ];
 
 module.exports = categorias;

@@ -35,6 +35,7 @@ class Propuestas_Main extends Component {
       listType: PropuestasTipo,
       showDetail: false,
       proposalType: 'Filtrar Categoría',
+      todos: false,
     }
   }
 
@@ -46,13 +47,22 @@ class Propuestas_Main extends Component {
     this.setState({ showDetail: !this.state.showDetail });
   };
 
+  showTodos = () => {
+    this.setState({ todos: !this.state.todos });
+  };
+
   search(txt) {
-    let filterTracks = this.state.fullList.filter(item => {
-      if (item.categoria.toLowerCase().match(txt.toLowerCase())) {
-        return item
-      }
-    })
-    this.setState({ list: this.state.list = filterTracks })
+    
+    if (txt == 'Todos') {
+      this.setState({ list: this.state.list = this.state.fullList })
+    } else {
+      let filterTracks = this.state.fullList.filter(item => {
+        if (item.categoria.toLowerCase().match(txt.toLowerCase())) {
+          return item
+        }
+      })
+      this.setState({ list: this.state.list = filterTracks })
+    }
   }
 
   parseData() {
