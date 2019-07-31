@@ -10,6 +10,7 @@ var grayColor = Colores.grayColor;
 var blueColor = Colores.blueColor;
 var whiteColor = Colores.whiteColor;
 var blackColor = Colores.blackColor;
+var input = Colores.textInputColor;
 
 const { width: WIDTH } = Dimensions.get('window');
 
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         fontSize: 16,
         paddingLeft: 45,
-        backgroundColor: blueColor,
+        backgroundColor: input,
         color: whiteColor,
         marginHorizontal: 25,
     },
