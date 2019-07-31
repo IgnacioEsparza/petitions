@@ -1,22 +1,15 @@
 import Categorias from './Categorias';
 
-var rechazado = '#ff0000'; //rojo
-var aceptado = '#008f39'; //verde
-var enviado = '#00b3ff'; //azul
-var proceso = '#ffb300'; //naranja
-var finalizado = '#8c8c8c'; //gris
-
 var list = Categorias;
 
-var incidencia = [
+var propuestas = [
     {
         id: 0,
         title:'Recuperen la Facultad de Medicina UdeC',
         categoria: list[4].category,
         direccion: 'Diego Portales 806',
         descripcion: 'La Facultad de Medicina fue tomada el día jueves 04 de Julio de 2019, por tercera vez en cuatro años, por un grupo de 133 estudiantes autodenominado "Asamblea de Facultad..La Facultad de Medicina fue tomada el día jueves 04 de Julio de 2019, por tercera vez en cuatro años, por un grupo de 133 estudiantes autodenominado "Asamblea de Facultad..La Facultad de Medicina fue tomada el día jueves 04 de Julio de 2019, por tercera vez en cuatro años, por un grupo de 133 estudiantes autodenominado "Asamblea de Facultad..',
-        estado: aceptado,
-        imagen: 'basural.jpg',
+        imagen: 'https://assets.change.org/photos/0/zf/mg/ddzfMGcdHyqYuqZ-800x450-noPad.jpg?1562430029',
         icon: list[4].icon,
         fecha: '26 de Enero 2056'
     },
@@ -26,8 +19,7 @@ var incidencia = [
         categoria: list[5].category,
         direccion: 'Arturo Prat 725',
         descripcion:'Las comunidades, asociaciones, organizaciones de la sociedad civil, ciudadanos conscientes, exigimos la salida inmediata del Comando Jungla de la Región de La Araucanía...',
-        estado: proceso,
-        imagen: '',
+        imagen: 'https://assets.change.org/photos/0/ak/ut/hLAKuTAJychVkxi-800x450-noPad.jpg?1560214038',
         icon: list[5].icon,
         fecha: '25 de Julio 2056'
     },
@@ -37,11 +29,10 @@ var incidencia = [
         categoria: list[2].category,
         direccion: 'Plaza Anibal Pinto',
         descripcion:'Por casi 60 años esta zona ha sido inescrupulosamente contaminada con diferentes elementos tóxicos que emanan de la veintena de industrias situadas en la bahía de Quintero...',
-        estado: rechazado,
-        imagen: '',
+        imagen: 'https://assets.change.org/photos/3/kw/rl/XUKWrLqRQyPgzlW-800x450-noPad.jpg?1535741504',
         icon: list[2].icon,
         fecha: '30 de Octubre 2056'
     },
 ];
 
-module.exports = incidencia;
+module.exports = propuestas;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, Image, Animated, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -51,6 +51,7 @@ export default class Propuesta_Extend extends Component {
 
     render() {
         var proposal = this.props.navigation.state.params.data;
+
         return (
             <View style={styles.MainContainer}>
                 <View style={{ flex: 90 }}>
@@ -68,7 +69,7 @@ export default class Propuesta_Extend extends Component {
                         </View>
 
                         <View style={styles.imagenContainer}>
-                            <Image source={require('../../Assets/Images/a1.jpg')} style={styles.imagenStyle} />
+                            <Image source={{ uri: proposal.imagen }} style={styles.imagenStyle} />
                         </View>
 
                         <View style={styles.lineContainer}>
