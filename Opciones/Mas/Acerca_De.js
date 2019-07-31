@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import Colores from '../../Data/Global_Colors'
 
-var blueColor = '#4b85eb';
-var grayColor = '#494949';
+var grayColor = Colores.grayColor;
+var whiteColor = Colores.whiteColor;
 
 export default class Acerca_De extends Component {
 
     static navigationOptions = {
         title: 'Acerca de',
         headerStyle: {
-            backgroundColor: '#ffffff',
+            backgroundColor: whiteColor,
             elevation: 1,
             shadowOpacity: 0,
             height: 40
@@ -38,14 +39,14 @@ const styles = StyleSheet.create({
 
     textContainer: {
         alignItems: 'center',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: whiteColor,
         marginBottom: 20,
         marginTop: 30
     },
 
     labelStyle: {
         fontSize: 12,
-        color: '#000000',
+        color: grayColor,
     },
 
 });

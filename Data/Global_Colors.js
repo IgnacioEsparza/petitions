@@ -1,11 +1,10 @@
-import { isModuleSpecifier } from "@babel/types";
 
-var globalColors = [
-    {
-        blueColor: '#024375',
-        grayColor: '#494949',
-        whiteColor: '#ffffff',
-    }
-]
+const globalColors = {
+    blueColor: '#024375',
+    grayColor: '#494949',
+    whiteColor: '#ffffff',
+    blackColor: '#000000'
+}
 
-module.exports = globalColors;
+
+export default globalColors;

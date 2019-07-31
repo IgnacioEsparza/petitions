@@ -2,16 +2,18 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Switch } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Colores from '../../Data/Global_Colors';
 
-var grayColor = '#494949';
-var blueColor = '#4b85eb';
+var grayColor = Colores.grayColor;
+var blueColor = Colores.blueColor;
+var whiteColor = Colores.whiteColor;
 
 class Mas_Main extends Component {
 
   static navigationOptions = {
     title: 'Más',
     headerStyle: {
-      backgroundColor: '#FFF',
+      backgroundColor: whiteColor,
       elevation: 1,
       shadowOpacity: 0,
       height: 40

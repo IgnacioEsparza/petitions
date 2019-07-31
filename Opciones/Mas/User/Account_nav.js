@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, Dimensions } from 'react-native';
 
+import Colores from '../../../Data/Global_Colors';
+
+var grayColor = Colores.grayColor;
+var blueColor = Colores.blueColor;
+var whiteColor = Colores.whiteColor;
+var blackColor = Colores.blackColor;
+
 const { width: WIDTH } = Dimensions.get('window');
-var grayColor = '#494949';
+
 
 export default class Account_nav extends Component {
 
   static navigationOptions = {
     title: 'Mi Cuenta',
     headerStyle: {
-      backgroundColor: '#FFF',
+      backgroundColor: whiteColor,
       elevation: 1,
       shadowOpacity: 0,
       height: 40
@@ -24,7 +31,7 @@ export default class Account_nav extends Component {
     return (
       <View style={styles.MainContainer}>
         <View style={styles.textContainer}>
-          <Text style={{ fontSize: 20, color: '#000000', }}>Proyecto Propuestas Municipales</Text>
+          <Text style={{ fontSize: 20, color: blackColor, }}>Proyecto Propuestas Municipales</Text>
         </View>
         <View style={styles.btnContainer}>
           <View style={styles.logoContainer}>
@@ -48,25 +55,18 @@ export default class Account_nav extends Component {
 const styles = StyleSheet.create({
   MainContainer: {
     flex: 1,
-    backgroundColor: '#FFFFFF'
-  },
-  BannerStyle: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#648a64',
-    alignItems: 'stretch',
-    padding: 10,
+    backgroundColor: whiteColor
   },
   
   textContainer: {
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: whiteColor,
     marginBottom: 20,
     marginTop: 30
   },
   btnContainer: {
     flex: 13,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: whiteColor,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -74,12 +74,12 @@ const styles = StyleSheet.create({
     width: WIDTH - 55,
     height: 45,
     borderRadius: 5,
-    backgroundColor: '#4b85eb',
+    backgroundColor: blueColor,
     justifyContent: 'center',
     marginTop: 20,
   },
   textBtnStyle: {
-    color: '#FFFFFF',
+    color: whiteColor,
     fontSize: 16,
     textAlign: 'center',
   },

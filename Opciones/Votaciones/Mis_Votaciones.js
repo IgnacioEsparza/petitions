@@ -3,8 +3,12 @@ import { View, Text, StyleSheet, ScrollView, Image, Animated, Dimensions, Toucha
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
-var grayColor = '#494949';
-var blueColor = '#4b85eb';
+import Colores from '../../Data/Global_Colors'
+
+var grayColor = Colores.grayColor;
+var blueColor = Colores.blueColor;
+var whiteColor = Colores.whiteColor;
+var blackColor = Colores.blackColor;
 var marginLeftGlobal = 20;
 
 export default class Mis_Votaciones extends Component {
@@ -12,7 +16,7 @@ export default class Mis_Votaciones extends Component {
     static navigationOptions = {
         title: 'Más Información',
         headerStyle: {
-            backgroundColor: '#ffffff',
+            backgroundColor: whiteColor,
             elevation: 1,
             shadowOpacity: 0,
             height: 40
@@ -83,27 +87,27 @@ const tam = 1.2;
 const styles = StyleSheet.create({
     MainContainer: {
         flex: 1,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: whiteColor,
         flexDirection: 'column'
     },
 
     titleTextStyle: {
         fontSize: 20,
-        color: '#000',
+        color: blackColor,
         paddingLeft: marginLeftGlobal,
         textAlign: 'justify'
     },
 
     textStyle: {
         fontSize: 16,
-        color: '#000',
+        color: blackColor,
         paddingLeft: marginLeftGlobal,
         textAlign: 'justify'
     },
 
     textDateStyle: {
         fontSize: 9,
-        color: '#000',
+        color: blackColor,
         textAlign: 'right',
         paddingRight: 20,
         fontStyle: 'italic'
@@ -149,7 +153,7 @@ const styles = StyleSheet.create({
         marginTop: 15,
         width: (240 * tam),
         height: (152 * tam),
-        borderColor: '#8c8c8c',
+        borderColor: grayColor,
         borderWidth: 2,
         borderRadius: 5
     },
@@ -171,14 +175,14 @@ const styles = StyleSheet.create({
     },
 
     textBtnStyle: {
-        color: '#FFFFFF',
+        color: whiteColor,
         fontSize: 16,
         textAlign: 'center',
     },
 
     btnContainer: {
         flex: 10,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: whiteColor,
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: 5,

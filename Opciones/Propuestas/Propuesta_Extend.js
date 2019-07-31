@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
+import Colores from '../../Data/Global_Colors'
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
-var grayColor = '#494949';
-var blueColor = '#4b85eb';
+var grayColor = Colores.grayColor;
+var blueColor = Colores.blueColor;
+var whiteColor = Colores.whiteColor;
+
 var marginLeftGlobal = 20;
 
 export default class Propuesta_Extend extends Component {
@@ -12,7 +15,7 @@ export default class Propuesta_Extend extends Component {
     static navigationOptions = {
         title: 'Más Información',
         headerStyle: {
-            backgroundColor: '#ffffff',
+            backgroundColor: whiteColor,
             elevation: 1,
             shadowOpacity: 0,
             height: 40
@@ -109,7 +112,7 @@ const tam = 1.2;
 const styles = StyleSheet.create({
     MainContainer: {
         flex: 1,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: whiteColor,
         flexDirection: 'column'
     },
 
@@ -175,7 +178,7 @@ const styles = StyleSheet.create({
         marginTop: 15,
         width: (240 * tam),
         height: (152 * tam),
-        borderColor: '#8c8c8c',
+        borderColor: grayColor,
         borderWidth: 2,
         borderRadius: 5
     },
@@ -197,14 +200,14 @@ const styles = StyleSheet.create({
     },
 
     textBtnStyle: {
-        color: '#FFFFFF',
+        color: whiteColor,
         fontSize: 16,
         textAlign: 'center',
     },
 
     btnContainer: {
         flex: 10,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: whiteColor,
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: 5,

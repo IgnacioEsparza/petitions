@@ -7,11 +7,17 @@ import Propuestas_Main from './Opciones/Propuestas/Propuestas_Main'
 import Menu_Main from './Opciones/Mas/Mas_Main';
 import Votaciones_Main from './Opciones/Votaciones/Votaciones_Main';
 
+import Colores from './Data/Global_Colors'
+
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 var menuIcon = 'list';
 var proposalIcon = 'compass';
 var voteIcon= 'vote-yea';
+
+var grayColor = Colores.grayColor;
+var blueColor = Colores.blueColor;
+var whiteColor = Colores.whiteColor;
 
 const TabNavigator = createMaterialTopTabNavigator({
   Menu: {
@@ -48,16 +54,16 @@ const TabNavigator = createMaterialTopTabNavigator({
       tabBarVisible: true
     },
     tabBarOptions: {
-      activeTintColor: '#ffffff',
+      activeTintColor: whiteColor,
       inactiveTintColor: '#ececec',
-      pressColor: '#ffffff',
+      pressColor: whiteColor,
       showIcon: true,
       showLabel: false,
       style: {
-        backgroundColor: '#4b85eb',
+        backgroundColor: blueColor,
       },
       indicatorStyle: {
-        backgroundColor: '#ffffff',
+        backgroundColor: whiteColor,
       }
     }
   });

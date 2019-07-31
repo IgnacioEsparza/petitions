@@ -6,9 +6,11 @@ import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
 import IncidenciaData from '../../Data/Propuestas';
 import PropuestasTipo from '../../Data/Categorias';
 import _ from 'lodash';
+import Colores from '../../Data/Global_Colors'
 
-var blueColor = '#4b85eb';
-var grayColor = '#494949';
+var grayColor = Colores.grayColor;
+var blueColor = Colores.blueColor;
+var whiteColor = Colores.whiteColor;
 var lineHeight = 1;
 
 class Propuestas_Main extends Component {
@@ -16,7 +18,7 @@ class Propuestas_Main extends Component {
   static navigationOptions = {
     title: 'Propuestas',
     headerStyle: {
-      backgroundColor: '#ffffff',
+      backgroundColor: whiteColor,
       elevation: 1,
       shadowOpacity: 0,
       height: 40
@@ -186,7 +188,7 @@ const styles = StyleSheet.create({
 
   FragmentStyle: {
     flex: 18,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: whiteColor,
   },
 
   item: {
@@ -221,8 +223,8 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 8,
     borderRadius: 5,
-    backgroundColor: '#FFF',
-    borderColor: '#4b85eb',
+    backgroundColor: whiteColor,
+    borderColor: blueColor,
     borderWidth: 2,
     // elevation: 2,
   },
@@ -297,7 +299,7 @@ const styles = StyleSheet.create({
     height: 10,
     width: "100%",
     marginTop: 10,
-    borderColor: '#8c8c8c',
+    borderColor: grayColor,
     borderWidth: 1,
     borderRadius: 2
   },
@@ -327,7 +329,7 @@ const styles = StyleSheet.create({
     marginTop: 2,
     marginBottom: 2,
     borderRadius: 5,
-    backgroundColor: '#FFF',
+    backgroundColor: whiteColor,
     elevation: 0,
     borderColor: blueColor,
     borderWidth: 1,

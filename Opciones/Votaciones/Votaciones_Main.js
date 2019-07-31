@@ -6,8 +6,11 @@ import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
 import IncidenciaData from '../../Data/Propuestas';
 import PropuestasTipo from '../../Data/Categorias';
 
-var blueColor = '#4b85eb';
-var grayColor = '#494949';
+import Colores from '../../Data/Global_Colors'
+
+var grayColor = Colores.grayColor;
+var blueColor = Colores.blueColor;
+var whiteColor = Colores.whiteColor;
 var lineHeight = 1;
 
 class Votaciones_Main extends Component {
@@ -15,7 +18,7 @@ class Votaciones_Main extends Component {
     static navigationOptions = {
         title: 'Mis Votaciones',
         headerStyle: {
-            backgroundColor: '#ffffff',
+            backgroundColor: whiteColor,
             elevation: 1,
             shadowOpacity: 0,
             height: 40
@@ -152,7 +155,7 @@ const styles = StyleSheet.create({
     },
     FragmentStyle: {
         flex: 18,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: whiteColor,
     },
     // Estilos de Lista
     listContainer: {
@@ -164,8 +167,8 @@ const styles = StyleSheet.create({
         marginTop: 8,
         marginBottom: 8,
         borderRadius: 5,
-        backgroundColor: '#FFF',
-        borderColor: '#4b85eb',
+        backgroundColor: whiteColor,
+        borderColor: blueColor,
         borderWidth: 2,
         // elevation: 2,
     },
@@ -248,7 +251,7 @@ const styles = StyleSheet.create({
         marginTop: 2,
         marginBottom: 2,
         borderRadius: 5,
-        backgroundColor: '#FFF',
+        backgroundColor: whiteColor,
         elevation: 0,
         borderColor: blueColor,
         borderWidth: 1,

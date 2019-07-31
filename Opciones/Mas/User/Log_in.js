@@ -3,17 +3,24 @@ import { StyleSheet, View, Image, Dimensions, TouchableOpacity, Text, ScrollView
 import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Entypo';
 
+import Colores from '../../../Data/Global_Colors';
+
+var grayColor = Colores.grayColor;
+var blueColor = Colores.blueColor;
+var whiteColor = Colores.whiteColor;
+var blackColor = Colores.blackColor;
+
+
 const { width: WIDTH } = Dimensions.get('window');
-var colorTextInput = '#FFFFFF';
-var grayColor = '#494949';
-var colorBtn = '#4b85eb';
+
+
 
 export default class Log_in extends Component {
 
     static navigationOptions = {
         title: 'Iniciar Sesión',
         headerStyle: {
-            backgroundColor: '#FFF',
+            backgroundColor: whiteColor,
             elevation: 1,
             shadowOpacity: 0,
             height: 40
@@ -43,26 +50,26 @@ export default class Log_in extends Component {
                     <View style={styles.inputTextContainer}>
                         <View style={styles.logoContainer}>
                             {/* <Image source={logo} style={styles.logoStyle} /> */}
-                            <Text style={{ fontSize: 20, color: '#000000', }}>Proyecto Propuestas Municipales</Text>
+                            <Text style={{ fontSize: 20, color: blackColor, }}>Proyecto Propuestas Municipales</Text>
                         </View>
                         <View style={styles.inputContainer}>
                             <TextInput
                                 style={styles.inputStyle}
                                 placeholder={'Número Telefónico'}
-                                placeholderTextColor={colorTextInput}
+                                placeholderTextColor={whiteColor}
                                 underlineColorAndroid='transparent' />
-                            <Icon name='phone' color='#FFFFFF' size={20} style={styles.inputIconStyle} />
+                            <Icon name='phone' color={whiteColor} size={20} style={styles.inputIconStyle} />
                         </View>
                         <View style={styles.inputContainer}>
                             <TextInput
                                 style={styles.inputStyle}
                                 placeholder={'Contraseña'}
                                 secureTextEntry={this.state.showPass}
-                                placeholderTextColor={colorTextInput}
+                                placeholderTextColor={whiteColor}
                                 underlineColorAndroid='transparent' />
-                            <Icon name='lock-open' color='#FFFFFF' size={20} style={styles.inputIconStyle} />
+                            <Icon name='lock-open' color={whiteColor} size={20} style={styles.inputIconStyle} />
                             <TouchableOpacity style={styles.eyeBtnStyle} onPress={this.showPass.bind(this)}>
-                                <Icon name={this.state.press == false ? 'eye' : 'eye-with-line'} color='#FFFFFF' size={20} />
+                                <Icon name={this.state.press == false ? 'eye' : 'eye-with-line'} color={whiteColor} size={20} />
                             </TouchableOpacity>
                         </View>
                         <TouchableOpacity style={styles.loginBtnStyle} onPress={this.loginBtn}>
@@ -93,12 +100,12 @@ const styles = StyleSheet.create({
     },
     textContainer: {
         alignItems: 'center',
-        backgroundColor: colorTextInput,
+        backgroundColor: whiteColor,
         marginTop: 20
     },
     labelStyle: {
         fontSize: 15,
-        color: '#000000',
+        color: blackColor,
     },
     logoStyle: {
         width: 120,
@@ -114,8 +121,8 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         fontSize: 16,
         paddingLeft: 45,
-        backgroundColor: colorBtn,
-        color: '#FFFFFF',
+        backgroundColor: blueColor,
+        color: whiteColor,
         marginHorizontal: 25,
     },
     inputContainer: {
@@ -123,7 +130,7 @@ const styles = StyleSheet.create({
     },
     inputTextContainer: {
         flex: 13,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: whiteColor,
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 50
@@ -132,12 +139,12 @@ const styles = StyleSheet.create({
         width: WIDTH - 55,
         height: 45,
         borderRadius: 5,
-        backgroundColor: colorBtn,
+        backgroundColor: blueColor,
         justifyContent: 'center',
         marginTop: 20,
     },
     textBtnStyle: {
-        color: '#FFFFFF',
+        color: whiteColor,
         fontSize: 16,
         textAlign: 'center',
     },

@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
-var blueColor = '#4b85eb';
-var grayColor = '#494949';
+import Colores from '../../Data/Global_Colors'
+
+var grayColor = Colores.grayColor;
+var blueColor = Colores.blueColor;
+var whiteColor = Colores.whiteColor;
 
 export default class Informacion extends Component {
 
     static navigationOptions = {
         title: 'Información',
         headerStyle: {
-            backgroundColor: '#ffffff',
+            backgroundColor: whiteColor,
             elevation: 1,
             shadowOpacity: 0,
             height: 40
