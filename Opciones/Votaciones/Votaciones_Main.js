@@ -125,7 +125,7 @@ class Votaciones_Main extends Component {
                                             style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 }}>
                                         </TouchableOpacity >
                                     </View >);
-                            }} keyExtractor={item => item.id} />
+                            }} keyExtractor={item => item.id.toString()} />
                         </View>
                     </View>) : null}
                 <View style={{ height: lineHeight, width: "100%", backgroundColor: blueColor, marginTop: 15, marginBottom: 10 }} />

@@ -151,7 +151,7 @@ class Propuestas_Main extends Component {
                     </View >);
 
                 }}
-                keyExtractor={item => item.id}
+                keyExtractor={item => item.id.toString()}
               />
 
             </View>
