@@ -41,21 +41,24 @@ class Votaciones_Main extends Component {
         }
     }
 
-    state = {
-        animation: new Animated.Value(0)
-    }
-
     // ingresarIncidenciaBtn = () => {
     //   this.props.navigation.navigate('Ing')
     // };
 
-    search(txt) {
+    search(txt) { // metodo de busqueda por categoría, verifica la existencia de propuestas por categoría
+        var cont = 0;
         if (txt == 'Todos') {
             this.setState({ list: this.state.list = this.state.fullList })
+            this.setState({ empty: this.state.empty = false })
         } else {
             let filterTracks = this.state.fullList.filter(item => {
                 if (item.categoria.toLowerCase().match(txt.toLowerCase())) {
+                    cont++
+                    this.setState({ empty: this.state.empty = false })
                     return item
+                }
+                if (cont == 0) {
+                    this.setState({ empty: this.state.empty = true })
                 }
             })
             this.setState({ list: this.state.list = filterTracks })
@@ -67,7 +70,7 @@ class Votaciones_Main extends Component {
     };
 
     parseData() {
-        if (this.state.list) {
+        if (this.state.list && !this.state.empty) {
             return this.state.list.map((data, i) => {
                 return (
                     <View key={i} style={styles.listContainer}>
@@ -96,6 +99,14 @@ class Votaciones_Main extends Component {
                     </View >
                 )
             })
+        } else {
+            return (
+                <View style={styles.textContainer}>
+                    <Text style={styles.labelStyle}>No existen propuestas en esta categoría actualmente</Text>
+                    <View style={styles.imagenContainer}>
+                        {/* <Image source={require('../../Assets/Images/cat.png')} style={styles.imagenStyle} resizeMode="contain" /> */}
+                    </View>
+                </View>)
         }
     }
 
@@ -255,6 +266,23 @@ const styles = StyleSheet.create({
         elevation: 0,
         borderColor: blueColor,
         borderWidth: 1,
+    },
+    //Estilos lista vacia
+    textContainer: {
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: whiteColor,
+        marginBottom: 20,
+        marginTop: 30
+    },
+    labelStyle: {
+        fontSize: 12,
+        color: grayColor,
+    },
+    //Estilo de imagen de lista vacía
+    imagenContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 });
 
