@@ -1,8 +1,8 @@
 var categorias = [
     {
         id: 0,
-        category: 'Animales',
-        icon: 'paw'
+        category: 'Todos',
+        icon: 'apps'
     },
     {
         id: 1,
@@ -31,8 +31,8 @@ var categorias = [
     },
     {
         id: 6,
-        category: 'Todos',
-        icon: 'apps'
+        category: 'Animales',
+        icon: 'paw'
     },
 ];
 
