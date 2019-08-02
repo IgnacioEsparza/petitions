@@ -99,9 +99,9 @@ export default class Propuesta_Extend extends Component {
                     </TouchableOpacity> */}
 
                     <TouchableOpacity style={styles.upVoteStyleBtn} onPress={this.votingUp.bind(this)}>
-                        <View style={{flexDirection:'row', alignItems:'center' }}>
-                        <Text style={styles.textBtnStyle}>Apoya esta propuesta</Text>
-                        <Icon name='ios-heart' color={!this.state.pressUp ? whiteColor : redColor} size={25} style={{margin:3}}></Icon>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={styles.textBtnStyle}>Apoya esta propuesta</Text>
+                            <Icon name='ios-heart' color={!this.state.pressUp ? whiteColor : redColor} size={18} style={{ margin: 8 }}></Icon>
                         </View>
                     </TouchableOpacity>
 
@@ -211,9 +211,9 @@ const styles = StyleSheet.create({
 
     textBtnStyle: {
         color: whiteColor,
-        fontSize: 16,
+        fontSize: 14,
         textAlign: 'center',
-        margin: 8
+        marginLeft: 10
     },
 
     btnContainer: {

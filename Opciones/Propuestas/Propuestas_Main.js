@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, TouchableOpacity, ScrollView, Text, ToastAndroid, FlatList, RefreshControl } from 'react-native';
+
+import {
+  StyleSheet,
+  View,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  Text,
+  FlatList,
+  ActivityIndicator,
+  RefreshControl
+} from 'react-native';
+
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
-import IncidenciaData from '../../Data/Propuestas';
+//import IncidenciaData from '../../Data/Propuestas';
 import PropuestasTipo from '../../Data/Categorias';
 import _ from 'lodash';
 import Colores from '../../Data/Global_Colors'
@@ -31,13 +43,65 @@ class Propuestas_Main extends Component {
   constructor() {
     super()
     this.state = {
-      list: IncidenciaData,
-      fullList: IncidenciaData,
+      //list: IncidenciaData,
+      //fullList: IncidenciaData,
       listType: PropuestasTipo,
       showDetail: false,
-      proposalType: 'Filtrar Categoría',
+      proposalType: 'Todos',
       empty: false,
+
+      //Carga de datos de la api
+
+      loading: false,
+      list: [],
+      fullList: [],
+      url: 'http://172.23.144.149:3000/api/propuesta',
+
+      //refreshing
+      refreshing: false,
     }
+  }
+
+  componentDidMount() {
+    this.getDatos();
+  }
+
+  getDatos = () => {
+    this.setState({ loading: true });
+    fetch(this.state.url)
+      .then(res => res.json())
+      .then(res => {
+
+        this.setState({
+          list: res.propuestas,
+          fullList: res.propuestas,
+          loading: false
+        })
+
+      })
+  }
+
+  _onRefresh = () => {
+    this.setState({ refreshing: true });
+    fetch(this.state.url)
+      .then(res => res.json())
+      .then(res => {
+
+        this.setState({
+          list: res.propuestas,
+          fullList: res.propuestas,
+          loading: false,
+          refreshing: false,
+          proposalType: this.state.proposalType = 'Todos' 
+        })
+
+        this.search(this.state.proposalType);
+
+      })
+
+    // this.setState({ proposalType: this.state.proposalType = 'Todos' });
+
+    // this.ShowDetail();
   }
 
   ShowDetail = () => {
@@ -67,44 +131,49 @@ class Propuestas_Main extends Component {
   parseData() {
 
     if (this.state.list && !this.state.empty) {
-      return this.state.list.map((data, i) => {
-        return (
-          <View key={i} style={styles.listContainer} >
+      return (
+        <View style={styles.FragmentStyle}>
+          <FlatList
+            data={this.state.list}
+            renderItem={
+              ({ item }) => {
+                return (
+                  <View item={item} parentFlatList={this} style={styles.listContainer} >
 
-            < View style={styles.listStyleRow} >
-              <IconMaterial name={data.icon} color={grayColor} size={20} />
-              <Text style={styles.typePetitionStyle}>{data.categoria}</Text>
-            </View>
+                    < View style={styles.listStyleRow} >
+                      <IconMaterial name={item.icon} color={grayColor} size={20} />
+                      <Text style={styles.typePetitionStyle}>{item.categoria}</Text>
+                    </View>
 
-            <View style={styles.listStyle} >
-              <View style={{ height: lineHeight, width: "100%", backgroundColor: blueColor }} />
-              <Text style={styles.titleTextStyle}>{data.title}</Text>
-              <View style={{ height: lineHeight, width: "60%", backgroundColor: blueColor }} />
-              <Text style={styles.infoTextStyle}>{data.descripcion}</Text>
-              <View style={{ height: lineHeight, width: "100%", backgroundColor: blueColor }} />
-            </View>
+                    <View style={styles.listStyle} >
+                      <View style={{ height: lineHeight, width: "100%", backgroundColor: blueColor }} />
+                      <Text style={styles.titleTextStyle}>{item.title}</Text>
+                      <View style={{ height: lineHeight, width: "60%", backgroundColor: blueColor }} />
+                      <Text style={styles.infoTextStyle}>{item.descripcion}</Text>
+                      <View style={{ height: lineHeight, width: "100%", backgroundColor: blueColor }} />
+                    </View>
 
-            < View style={styles.RowContainer} >
-              <View style={styles.listStyleRowAdd}>
-                <Text style={styles.addInfoTextStyle}>{data.direccion}</Text>
-              </View>
-              <View style={styles.listStyleRowAdd}>
-                <Text style={styles.addInforTextStyleVote}>Votos: 99</Text>
-              </View>
+                    < View style={styles.RowContainer} >
+                      <View style={styles.listStyleRowAdd}>
+                        <Text style={styles.addInfoTextStyle}></Text>
+                      </View>
+                      <View style={styles.listStyleRowAdd}>
+                        <Text style={styles.addInfoTextStyle}>Votos: 99</Text>
+                      </View>
+                    </View>
 
-            </View>
+                    <TouchableOpacity onPress={() => { this.props.navigation.navigate('Ext', { data: item }) }}
+                      style={styles.buttonListStyles}>
+                    </TouchableOpacity >
 
-            {/* <TouchableOpacity onPress={() => { ToastAndroid.show(data.incidente, ToastAndroid.SHORT); }}
-              style={styles.buttonListStyles}>
-            </TouchableOpacity > */}
+                  </View >
+                );
+              }
+            }
+            keyExtractor={(item, index) => index.toString()} />
 
-            <TouchableOpacity onPress={() => { this.props.navigation.navigate('Ext', { data: data }) }}
-              style={styles.buttonListStyles}>
-            </TouchableOpacity >
+        </View>)
 
-          </View >
-        )
-      })
     } else {
       return (
         <View style={styles.textContainer}>
@@ -170,11 +239,19 @@ class Propuestas_Main extends Component {
   }
 
   render() {
+
+    if (this.state.loading) {
+      return (
+        <View style={[styles.containerIndicator, styles.horizontalIndicator]}>
+          <ActivityIndicator size={80} color={blueColor} />
+        </View>
+      );
+    }
     return (
 
       <View style={styles.MainContainer}>
 
-        <ScrollView>
+        <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh} />}>
           {this.selectType()}
           <View>
             {this.parseData()}
@@ -183,6 +260,7 @@ class Propuestas_Main extends Component {
 
       </View>
     );
+
   }
 }
 
@@ -264,14 +342,6 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     marginTop: 5,
     color: grayColor,
-  },
-
-  addInforTextStyleVote: {
-    fontSize: 11,
-    fontStyle: 'italic',
-    marginTop: 5,
-    color: whiteColor,
-    backgroundColor: blueColor,
   },
 
   listStyle: {
@@ -367,6 +437,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+  //estilos ActivityIndicator
+
+  containerIndicator: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  horizontalIndicator: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10
+  }
 
 });
 
