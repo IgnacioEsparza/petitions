@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 var grayColor = Colores.grayColor;
 var blueColor = Colores.blueColor;
 var whiteColor = Colores.whiteColor;
+var redColor = Colores.redColor;
 
 var marginLeftGlobal = 20;
 
@@ -93,12 +94,15 @@ export default class Propuesta_Extend extends Component {
                         <Text>156 / 2000 Votos </Text>
                     </View>
 
-                    <TouchableOpacity style={styles.upVoteStyle} onPress={this.votingDown.bind(this)} >
+                    {/* <TouchableOpacity style={styles.upVoteStyle} onPress={this.votingDown.bind(this)} >
                         <Text><Icon name='md-arrow-dropdown-circle' color={!this.state.pressDown ? grayColor : 'red'} size={40}></Icon></Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
 
-                    <TouchableOpacity style={styles.upVoteStyle} onPress={this.votingUp.bind(this)}>
-                        <Text><Icon name='md-arrow-dropup-circle' color={!this.state.pressUp ? grayColor : blueColor} size={40}></Icon></Text>
+                    <TouchableOpacity style={styles.upVoteStyleBtn} onPress={this.votingUp.bind(this)}>
+                        <View style={{flexDirection:'row', alignItems:'center' }}>
+                        <Text style={styles.textBtnStyle}>Apoya esta propuesta</Text>
+                        <Icon name='ios-heart' color={!this.state.pressUp ? whiteColor : redColor} size={25} style={{margin:3}}></Icon>
+                        </View>
                     </TouchableOpacity>
 
                 </View>
@@ -189,20 +193,27 @@ const styles = StyleSheet.create({
     },
 
     upVoteStyle: {
-        // width: 60,
-        // height: 30,
-        // borderRadius: 5,
-        // backgroundColor: blueColor,
         alignItems: 'center',
         justifyContent: 'center',
-        marginRight: 20,
+        marginRight: 8,
         marginLeft: 20
     },
+
+    upVoteStyleBtn: {
+        marginRight: 5,
+        marginLeft: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: blueColor,
+        borderRadius: 12,
+    },
+
 
     textBtnStyle: {
         color: whiteColor,
         fontSize: 16,
         textAlign: 'center',
+        margin: 8
     },
 
     btnContainer: {
@@ -212,7 +223,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginBottom: 5,
         flexDirection: 'row',
-
     },
 
 });

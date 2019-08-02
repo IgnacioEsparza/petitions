@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, Image, Animated, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
+import Colores from '../../Data/Global_Colors'
 
 import Icon from 'react-native-vector-icons/Ionicons';
-
-import Colores from '../../Data/Global_Colors'
 
 var grayColor = Colores.grayColor;
 var blueColor = Colores.blueColor;
 var whiteColor = Colores.whiteColor;
-var blackColor = Colores.blackColor;
+var redColor = Colores.redColor;
+
 var marginLeftGlobal = 20;
 
 export default class Mis_Votaciones extends Component {
@@ -28,12 +28,38 @@ export default class Mis_Votaciones extends Component {
         // header: null
     }
 
+    constructor() {
+        super()
+        this.state = {
+            vote: true,
+            pressUp: false,
+            pressDown: false,
+        };
+    }
+
+    votingUp = () => {
+        this.setState({ vote: !this.state.vote, pressUp: !this.state.pressUp });
+
+        if (this.state.pressDown) {
+            this.setState({ vote: !this.state.vote, pressDown: !this.state.pressDown });
+        }
+    }
+
+    votingDown = () => {
+        this.setState({ vote: !this.state.vote, pressDown: !this.state.pressDown });
+
+        if (this.state.pressUp) {
+            this.setState({ vote: !this.state.vote, pressUp: !this.state.pressUp });
+        }
+    }
+
     render() {
         var proposal = this.props.navigation.state.params.data;
+
         return (
             <View style={styles.MainContainer}>
                 <View style={{ flex: 90 }}>
-                    
+
                     <ScrollView>
 
                         <View style={styles.titleContainer}>
@@ -47,7 +73,7 @@ export default class Mis_Votaciones extends Component {
                         </View>
 
                         <View style={styles.imagenContainer}>
-                            <Image source={require('../../Assets/Images/a1.jpg')} style={styles.imagenStyle} />
+                            <Image source={{ uri: proposal.imagen }} style={styles.imagenStyle} />
                         </View>
 
                         <View style={styles.lineContainer}>
@@ -68,12 +94,15 @@ export default class Mis_Votaciones extends Component {
                         <Text>156 / 2000 Votos </Text>
                     </View>
 
-                    <TouchableOpacity style={styles.upVoteStyle}>
-                        <Text><Icon name='md-arrow-dropdown-circle' color='red' size={40}></Icon></Text>
-                    </TouchableOpacity>
+                    {/* <TouchableOpacity style={styles.upVoteStyle} onPress={this.votingDown.bind(this)} >
+                        <Text><Icon name='md-arrow-dropdown-circle' color={!this.state.pressDown ? grayColor : 'red'} size={40}></Icon></Text>
+                    </TouchableOpacity> */}
 
-                    <TouchableOpacity style={styles.upVoteStyle}>
-                        <Text><Icon name='md-arrow-dropup-circle' color={blueColor} size={40}></Icon></Text>
+                    <TouchableOpacity style={styles.upVoteStyleBtn} onPress={this.votingUp.bind(this)}>
+                        <View style={{flexDirection:'row', alignItems:'center' }}>
+                        <Text style={styles.textBtnStyle}>Apoya esta propuesta</Text>
+                        <Icon name='ios-heart' color={!this.state.pressUp ? whiteColor : redColor} size={25} style={{margin:3}}></Icon>
+                        </View>
                     </TouchableOpacity>
 
                 </View>
@@ -93,21 +122,21 @@ const styles = StyleSheet.create({
 
     titleTextStyle: {
         fontSize: 20,
-        color: blackColor,
+        color: '#000',
         paddingLeft: marginLeftGlobal,
         textAlign: 'justify'
     },
 
     textStyle: {
         fontSize: 16,
-        color: blackColor,
+        color: '#000',
         paddingLeft: marginLeftGlobal,
         textAlign: 'justify'
     },
 
     textDateStyle: {
         fontSize: 9,
-        color: blackColor,
+        color: '#000',
         textAlign: 'right',
         paddingRight: 20,
         fontStyle: 'italic'
@@ -164,20 +193,27 @@ const styles = StyleSheet.create({
     },
 
     upVoteStyle: {
-        // width: 60,
-        // height: 30,
-        // borderRadius: 5,
-        // backgroundColor: blueColor,
         alignItems: 'center',
         justifyContent: 'center',
-        marginRight: 20,
+        marginRight: 8,
         marginLeft: 20
     },
+
+    upVoteStyleBtn: {
+        marginRight: 5,
+        marginLeft: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: blueColor,
+        borderRadius: 12,
+    },
+
 
     textBtnStyle: {
         color: whiteColor,
         fontSize: 16,
         textAlign: 'center',
+        margin: 8
     },
 
     btnContainer: {
@@ -187,7 +223,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginBottom: 5,
         flexDirection: 'row',
-
     },
 
 });

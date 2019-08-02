@@ -89,7 +89,7 @@ class Propuestas_Main extends Component {
                 <Text style={styles.addInfoTextStyle}>{data.direccion}</Text>
               </View>
               <View style={styles.listStyleRowAdd}>
-                <Text style={styles.addInfoTextStyle}>Votos: 99</Text>
+                <Text style={styles.addInforTextStyleVote}>Votos: 99</Text>
               </View>
 
             </View>
@@ -264,6 +264,14 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     marginTop: 5,
     color: grayColor,
+  },
+
+  addInforTextStyleVote: {
+    fontSize: 11,
+    fontStyle: 'italic',
+    marginTop: 5,
+    color: whiteColor,
+    backgroundColor: blueColor,
   },
 
   listStyle: {
