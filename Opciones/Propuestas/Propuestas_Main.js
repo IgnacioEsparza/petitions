@@ -14,9 +14,11 @@ import {
 
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
-//import IncidenciaData from '../../Data/Propuestas';
 import PropuestasTipo from '../../Data/Categorias';
 import _ from 'lodash';
+
+
+import Api from '../../Data/Api';
 import Colores from '../../Data/Global_Colors'
 
 var grayColor = Colores.grayColor;
@@ -55,7 +57,7 @@ class Propuestas_Main extends Component {
       loading: false,
       list: [],
       fullList: [],
-      url: 'http://172.23.144.149:3000/api/propuesta',
+      url: Api.api+'propuesta',
 
       //refreshing
       refreshing: false,

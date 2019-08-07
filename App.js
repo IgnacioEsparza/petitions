@@ -13,8 +13,8 @@ export default class App extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Perfil></Perfil>
-        {/* <Navigator></Navigator> */}
+        {/* <Perfil></Perfil> */}
+        <Navigator></Navigator>
         {/* <Conexion></Conexion> */}
       </View>
     );

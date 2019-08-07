@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Dimensions, TouchableOpacity, Text, ScrollView, Image } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Entypo';
-import IconAwesome from 'react-native-vector-icons/FontAwesome'
 
 import Colores from '../../../Data/Global_Colors';
 import Api from '../../../Data/Api';

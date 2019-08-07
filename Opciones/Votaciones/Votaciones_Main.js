@@ -9,6 +9,7 @@ import PropuestasTipo from '../../Data/Categorias';
 import Colores from '../../Data/Global_Colors'
 
 var grayColor = Colores.grayColor;
+var softGray = Colores.softGrayColor;
 var blueColor = Colores.blueColor;
 var whiteColor = Colores.whiteColor;
 var lineHeight = 1;
@@ -77,15 +78,15 @@ class Votaciones_Main extends Component {
 
                     <View key={i} style={styles.listContainer}>
                         < View style={styles.listStyleRow} >
-                            <IconMaterial name={data.icon} color={grayColor} size={20} />
+                            <IconMaterial name={data.icon} color={blueColor} size={20} />
                             <Text style={styles.typePetitionStyle}>{data.categoria}</Text>
                         </View>
                         <View style={styles.listStyle} >
-                            <View style={{ height: lineHeight, width: "100%", backgroundColor: blueColor }} />
+                            <View style={{ height: lineHeight, width: "100%", backgroundColor: softGray }} />
                             <Text style={styles.titleTextStyle}>{data.title}</Text>
-                            <View style={{ height: lineHeight, width: "60%", backgroundColor: blueColor }} />
+                            <View style={{ height: lineHeight, width: "60%", backgroundColor: softGray }} />
                             <Text style={styles.infoTextStyle}>{data.descripcion}</Text>
-                            <View style={{ height: lineHeight, width: "100%", backgroundColor: blueColor }} />
+                            <View style={{ height: lineHeight, width: "100%", backgroundColor: softGray }} />
                         </View>
                         < View style={styles.RowContainer} >
                             {/* <View style={styles.listStyleRowAdd}>
@@ -94,7 +95,7 @@ class Votaciones_Main extends Component {
 
                             <View style={styles.listStyleRowAdd}>
                                 <Text style={styles.addInfoTextStyle}>
-                                    <IconMaterial name='account-multiple' color={whiteColor} size={15} />
+                                    <IconMaterial name='account-multiple' color={blueColor} size={15} />
                                     &nbsp;&nbsp;&nbsp;Votos: 99</Text>
                             </View>
                         </View>
@@ -107,12 +108,16 @@ class Votaciones_Main extends Component {
             })
         } else {
             return (
-                <View style={styles.textContainer}>
-                    <Text style={styles.labelStyle}>No existen propuestas en esta categoría actualmente</Text>
-                    <View style={styles.imagenContainer}>
-                        {/* <Image source={require('../../Assets/Images/cat.png')} style={styles.imagenStyle} resizeMode="contain" /> */}
+                <View style={{flex: 1, alignItems: 'center'}}>
+                    <View style={{ height: lineHeight, width: "90%", backgroundColor: softGray, marginBottom: 10, marginTop:5 }} ></View>
+                    <View style={styles.textContainer}>
+                        <Text style={styles.labelStyle}>No existen propuestas en esta categoría actualmente</Text>
+                        <View style={styles.imagenContainer}>
+                            {/* <Image source={require('../../Assets/Images/cat.png')} style={styles.imagenStyle} resizeMode="contain" /> */}
+                        </View>
                     </View>
-                </View>)
+                </View>
+            )
         }
 
     }
@@ -127,7 +132,7 @@ class Votaciones_Main extends Component {
                 {this.state.showDetail ? (
                     <View style={styles.MainContainer}>
                         <View style={styles.FragmentStyle}>
-                            <View style={{ height: lineHeight, width: "100%", backgroundColor: whiteColor, marginTop: 15, marginBottom: 10, elevation: 1 }} />
+                            {/* <View style={{ height: lineHeight, width: "100%", backgroundColor: whiteColor, marginTop: 15, marginBottom: 10, elevation: 1 }} /> */}
                             <FlatList data={this.state.listType} renderItem={({ item, index }) => {
                                 return (
                                     <View item={item} index={index} parentFlatList={this} style={styles.containerFlat}>
@@ -146,7 +151,7 @@ class Votaciones_Main extends Component {
                             }} keyExtractor={item => item.id.toString()} />
                         </View>
                     </View>) : null}
-                <View style={{ height: lineHeight, width: "100%", backgroundColor: whiteColor, marginTop: 15, marginBottom: 10, elevation: 0.5 }} />
+                {/* <View style={{ height: lineHeight, width: "100%", backgroundColor: whiteColor, marginTop: 15, marginBottom: 10, elevation: 0.5 }} /> */}
             </TouchableOpacity>
         );
     }
@@ -173,6 +178,7 @@ const styles = StyleSheet.create({
     },
     FragmentStyle: {
         flex: 18,
+        marginBottom: 10
         // backgroundColor: whiteColor,
     },
     // Estilos de Lista
@@ -207,7 +213,7 @@ const styles = StyleSheet.create({
     },
     typePetitionStyle: {
         fontSize: 18,
-        color: grayColor,
+        color: blueColor,
         marginBottom: 5,
         marginLeft: 10,
     },
@@ -215,12 +221,12 @@ const styles = StyleSheet.create({
         fontSize: 11,
         fontStyle: 'italic',
         marginTop: 5,
-        color: whiteColor,
+        color: blueColor,
         elevation: 0.2,
         padding: 7,
         borderRadius: 5,
-        borderColor: blueColor,
-        backgroundColor: blueColor
+        borderColor: softGray,
+        backgroundColor: softGray
     },
     listStyle: {
         flex: 1,
@@ -266,7 +272,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         color: grayColor,
         fontSize: 15,
-        marginTop: 15
+        marginTop: 15,
+        marginBottom: 10
     },
     containerFlat: {
         flex: 1,
@@ -278,7 +285,7 @@ const styles = StyleSheet.create({
         marginBottom: 2,
         borderRadius: 5,
         backgroundColor: whiteColor,
-        borderColor: blueColor,
+        borderColor: softGray,
         borderWidth: 1,
     },
     //Estilos lista vacia
@@ -286,7 +293,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: whiteColor,
         marginBottom: 20,
-        marginTop: 30
+        marginTop: 30,
+        alignItems: 'center'
     },
     labelStyle: {
         fontSize: 12,
@@ -300,6 +308,7 @@ const styles = StyleSheet.create({
 });
 
 import misVotaciones from './Mis_Votaciones';
+import { blue } from 'ansi-colors';
 
 const AppNavigator = createStackNavigator({
     Inicio: { screen: Votaciones_Main },
