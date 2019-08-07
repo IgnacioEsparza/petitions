@@ -40,7 +40,7 @@ class Mas_Main extends Component {
       <View style={styles.MainContainer}>
 
         <View >
-          <TouchableOpacity onPress={() => { this.props.navigation.navigate('Account') }}>
+          <TouchableOpacity onPress={() => { this.props.navigation.navigate('Perfil') }}>
             <Text style={styles.textStyleMain}>Cuenta</Text>
             <Icon name='md-contact' size={30} color={blueColor} style={styles.iconStyleCuenta}></Icon>
           </TouchableOpacity>
@@ -158,6 +158,7 @@ import Log_in from './User/Log_in';
 import Check_in from './User/Check_in';
 import Acerca_de from './Acerca_De';
 import Informacion from './Informacion';
+import Perfil from './User/Perfil';
 
 const AppNavigator = createStackNavigator({
   Inicio: { screen: Mas_Main },
@@ -166,6 +167,7 @@ const AppNavigator = createStackNavigator({
   Checkin: { screen: Check_in },
   Acerca: { screen: Acerca_de },
   Info: { screen: Informacion },
+  Perfil: {screen: Perfil}
 });
 
 export default createAppContainer(AppNavigator);

@@ -223,8 +223,10 @@ const styles = StyleSheet.create({
         backgroundColor: whiteColor,
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 5,
         flexDirection: 'row',
+        borderTopColor: softGray,
+        borderColor: softGray,
+        borderWidth:1,
     },
 
 });

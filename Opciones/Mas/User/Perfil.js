@@ -97,7 +97,7 @@ export default class Perfil extends Component {
                     <TouchableOpacity>
                         <View style={{ alignItems: 'flex-end', marginTop: 20, marginEnd: 20 }}>
                             <View style={{ flexDirection: 'row' }}>
-                                <Text style={{ color: blueColor, fontSize: 20 }}>Guardar</Text>
+                                <Text style={{ color: blueColor, fontSize: 20, marginBottom: 30 }}>Guardar</Text>
                                 <Icon name='triangle-right' color={blueColor} size={40} style={styles.iconStyle} />
                             </View>
                         </View>

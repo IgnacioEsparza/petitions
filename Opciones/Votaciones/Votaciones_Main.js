@@ -108,8 +108,8 @@ class Votaciones_Main extends Component {
             })
         } else {
             return (
-                <View style={{flex: 1, alignItems: 'center'}}>
-                    <View style={{ height: lineHeight, width: "90%", backgroundColor: softGray, marginBottom: 10, marginTop:5 }} ></View>
+                <View style={{ flex: 1, alignItems: 'center' }}>
+                    <View style={{ height: lineHeight, width: "90%", backgroundColor: softGray, marginBottom: 10, marginTop: 5 }} ></View>
                     <View style={styles.textContainer}>
                         <Text style={styles.labelStyle}>No existen propuestas en esta categoría actualmente</Text>
                         <View style={styles.imagenContainer}>
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
         marginBottom: 10
         // backgroundColor: whiteColor,
     },
-    
+
     // Estilos de Lista
     listContainer: {
         flex: 1,
@@ -196,6 +196,7 @@ const styles = StyleSheet.create({
         // borderColor: blueColor,
         // borderWidth: 2,
         elevation: 2,
+        borderRadius: 5
     },
     titleTextStyle: {
         fontSize: 20,

@@ -295,6 +295,7 @@ const styles = StyleSheet.create({
     // borderColor: blueColor,
     // borderWidth: 2,
     elevation: 2,
+    borderRadius: 5
   },
   titleTextStyle: {
     fontSize: 20,
