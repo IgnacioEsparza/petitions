@@ -181,6 +181,7 @@ const styles = StyleSheet.create({
         marginBottom: 10
         // backgroundColor: whiteColor,
     },
+    
     // Estilos de Lista
     listContainer: {
         flex: 1,

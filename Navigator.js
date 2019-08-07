@@ -51,7 +51,7 @@ const TabNavigator = createMaterialTopTabNavigator({
     initialRouteName: 'Propuestas',
     order: ['Menu', 'Propuestas', 'Votaciones'],
     navigationOptions: {
-      tabBarVisible: false
+      tabBarVisible: false,
     },
     tabBarOptions: {
       activeTintColor: whiteColor,

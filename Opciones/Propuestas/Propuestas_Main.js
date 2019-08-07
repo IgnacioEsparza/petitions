@@ -24,6 +24,7 @@ import Colores from '../../Data/Global_Colors'
 var grayColor = Colores.grayColor;
 var blueColor = Colores.blueColor;
 var whiteColor = Colores.whiteColor;
+var softGray = Colores.softGrayColor;
 var lineHeight = 1;
 
 class Propuestas_Main extends Component {
@@ -57,7 +58,7 @@ class Propuestas_Main extends Component {
       loading: false,
       list: [],
       fullList: [],
-      url: Api.api+'propuesta',
+      url: Api.api + 'propuesta',
 
       //refreshing
       refreshing: false,
@@ -94,7 +95,7 @@ class Propuestas_Main extends Component {
           fullList: res.propuestas,
           loading: false,
           refreshing: false,
-          proposalType: this.state.proposalType = 'Todos' 
+          proposalType: this.state.proposalType = 'Todos'
         })
 
         this.search(this.state.proposalType);
@@ -143,25 +144,22 @@ class Propuestas_Main extends Component {
                   <View item={item} parentFlatList={this} style={styles.listContainer} >
 
                     < View style={styles.listStyleRow} >
-                      <IconMaterial name={item.icon} color={grayColor} size={20} />
+                      <IconMaterial name={item.icon} color={blueColor} size={20} />
                       <Text style={styles.typePetitionStyle}>{item.categoria}</Text>
                     </View>
 
                     <View style={styles.listStyle} >
-                      <View style={{ height: lineHeight, width: "100%", backgroundColor: blueColor }} />
+                      <View style={{ height: lineHeight, width: "100%", backgroundColor: softGray }} />
                       <Text style={styles.titleTextStyle}>{item.title}</Text>
-                      <View style={{ height: lineHeight, width: "60%", backgroundColor: blueColor }} />
+                      <View style={{ height: lineHeight, width: "60%", backgroundColor: softGray }} />
                       <Text style={styles.infoTextStyle}>{item.descripcion}</Text>
-                      <View style={{ height: lineHeight, width: "100%", backgroundColor: blueColor }} />
+                      <View style={{ height: lineHeight, width: "100%", backgroundColor: softGray }} />
                     </View>
 
-                    < View style={styles.RowContainer} >
-                      <View style={styles.listStyleRowAdd}>
-                        <Text style={styles.addInfoTextStyle}></Text>
-                      </View>
-                      <View style={styles.listStyleRowAdd}>
-                        <Text style={styles.addInfoTextStyle}>Votos: 99</Text>
-                      </View>
+                    <View style={styles.listStyleRowAdd}>
+                      <Text style={styles.addInfoTextStyle}>
+                        <IconMaterial name='account-multiple' color={blueColor} size={15} />
+                        &nbsp;&nbsp;&nbsp;Votos: 99</Text>
                     </View>
 
                     <TouchableOpacity onPress={() => { this.props.navigation.navigate('Ext', { data: item }) }}
@@ -178,12 +176,16 @@ class Propuestas_Main extends Component {
 
     } else {
       return (
-        <View style={styles.textContainer}>
-          <Text style={styles.labelStyle}>No existen propuestas en esta categoría actualmente</Text>
-          <View style={styles.imagenContainer}>
-            {/* <Image source={require('../../Assets/Images/cat.png')} style={styles.imagenStyle} resizeMode="contain" /> */}
+        <View style={{ flex: 1, alignItems: 'center' }}>
+          <View style={{ height: lineHeight, width: "90%", backgroundColor: softGray, marginBottom: 10, marginTop: 5 }} ></View>
+          <View style={styles.textContainer}>
+            <Text style={styles.labelStyle}>No existen propuestas en esta categoría actualmente</Text>
+            <View style={styles.imagenContainer}>
+              {/* <Image source={require('../../Assets/Images/cat.png')} style={styles.imagenStyle} resizeMode="contain" /> */}
+            </View>
           </View>
-        </View>)
+        </View>
+      )
     }
   }
 
@@ -199,8 +201,6 @@ class Propuestas_Main extends Component {
         {this.state.showDetail ? (
           <View style={styles.MainContainer}>
             <View style={styles.FragmentStyle}>
-
-              <View style={{ height: lineHeight, width: "100%", backgroundColor: blueColor, marginTop: 15, marginBottom: 10 }} />
 
               <FlatList data={this.state.listType}
                 renderItem={({ item, index }) => {
@@ -232,8 +232,6 @@ class Propuestas_Main extends Component {
 
             </View>
           </View>) : null}
-
-        <View style={{ height: lineHeight, width: "100%", backgroundColor: blueColor, marginTop: 15, marginBottom: 10 }} />
 
       </TouchableOpacity>
 
@@ -270,10 +268,10 @@ const styles = StyleSheet.create({
   MainContainer: {
     flex: 1,
   },
-
   FragmentStyle: {
     flex: 18,
-    backgroundColor: whiteColor,
+    marginBottom: 10
+    // backgroundColor: whiteColor,
   },
 
   item: {
@@ -282,47 +280,29 @@ const styles = StyleSheet.create({
     height: 44,
   },
 
-  button: {
-    width: 60,
-    height: 60,
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#333',
-    shadowOpacity: .1,
-    shadowOffset: { x: 2, y: 0 },
-    shadowRadius: 2,
-    borderRadius: 30,
-    position: 'absolute',
-    bottom: 20,
-    right: 20,
-  },
-
   // Estilos de Lista
 
   listContainer: {
     flex: 1,
     // flexDirection: 'row',
     padding: 10,
-    marginLeft: 16,
-    marginRight: 16,
+    marginLeft: 5,
+    marginRight: 5,
     marginTop: 8,
     marginBottom: 8,
-    borderRadius: 5,
+    // borderRadius: 5,
     backgroundColor: whiteColor,
-    borderColor: blueColor,
-    borderWidth: 2,
-    // elevation: 2,
+    // borderColor: blueColor,
+    // borderWidth: 2,
+    elevation: 2,
   },
-
   titleTextStyle: {
     fontSize: 20,
     fontStyle: 'normal',
     marginTop: 5,
     marginBottom: 10,
     color: grayColor
-
   },
-
   infoTextStyle: {
     fontSize: 18,
     fontStyle: 'normal',
@@ -331,21 +311,23 @@ const styles = StyleSheet.create({
     color: grayColor,
     textAlign: 'justify',
   },
-
   typePetitionStyle: {
     fontSize: 18,
-    color: grayColor,
+    color: blueColor,
     marginBottom: 5,
     marginLeft: 10,
   },
-
   addInfoTextStyle: {
     fontSize: 11,
     fontStyle: 'italic',
     marginTop: 5,
-    color: grayColor,
+    color: blueColor,
+    elevation: 0.2,
+    padding: 7,
+    borderRadius: 5,
+    borderColor: softGray,
+    backgroundColor: softGray
   },
-
   listStyle: {
     flex: 1,
     flexDirection: 'column',
@@ -353,42 +335,31 @@ const styles = StyleSheet.create({
     marginEnd: 10,
     justifyContent: 'center',
   },
-
   listStyleRow: {
     flex: 1,
     marginLeft: 12,
     flexDirection: 'row',
     marginBottom: 5,
   },
-
   listStyleRowAdd: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'flex-end',
+    marginRight: 15,
+    marginLeft: 20
   },
-
   typeRowStyle: {
     flex: 1,
     marginLeft: 12,
     flexDirection: 'row',
     marginBottom: 5,
     justifyContent: 'center',
+    elevation: 2,
   },
-
   RowContainer: {
     flex: 1,
     marginLeft: 12,
     flexDirection: 'row',
   },
-
-  stateStyle: {
-    height: 10,
-    width: "100%",
-    marginTop: 10,
-    borderColor: grayColor,
-    borderWidth: 1,
-    borderRadius: 2
-  },
-
   buttonListStyles: {
     position: 'absolute',
     top: 0,
@@ -396,15 +367,14 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0
   },
-
   typeSelectorStyle: {
     alignContent: 'center',
     alignSelf: 'center',
     color: grayColor,
     fontSize: 15,
-    marginTop: 15
+    marginTop: 15,
+    marginBottom: 10
   },
-
   containerFlat: {
     flex: 1,
     flexDirection: 'row',
@@ -415,18 +385,17 @@ const styles = StyleSheet.create({
     marginBottom: 2,
     borderRadius: 5,
     backgroundColor: whiteColor,
-    elevation: 0,
-    borderColor: blueColor,
+    borderColor: softGray,
     borderWidth: 1,
   },
 
   //Estilos lista vacia
   textContainer: {
     flex: 1,
-    alignItems: 'center',
     backgroundColor: whiteColor,
     marginBottom: 20,
-    marginTop: 30
+    marginTop: 30,
+    alignItems: 'center'
   },
 
   labelStyle: {

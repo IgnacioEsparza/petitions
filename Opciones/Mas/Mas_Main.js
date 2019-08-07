@@ -7,6 +7,7 @@ import Colores from '../../Data/Global_Colors';
 var grayColor = Colores.grayColor;
 var blueColor = Colores.blueColor;
 var whiteColor = Colores.whiteColor;
+var softGray = Colores.softGrayColor;
 
 class Mas_Main extends Component {
 
@@ -41,7 +42,7 @@ class Mas_Main extends Component {
         <View >
           <TouchableOpacity onPress={() => { this.props.navigation.navigate('Account') }}>
             <Text style={styles.textStyleMain}>Cuenta</Text>
-            <Icon name='md-contact' size={30} color={grayColor} style={styles.iconStyleCuenta}></Icon>
+            <Icon name='md-contact' size={30} color={blueColor} style={styles.iconStyleCuenta}></Icon>
           </TouchableOpacity>
         </View>
 
@@ -53,7 +54,7 @@ class Mas_Main extends Component {
 
           <View style={{ flex: 1 }}>
             <Text style={styles.textStyle}>{this.state.switchValue ? 'Notificaciones on' : 'Notificaciones off'}</Text>
-            <Icon name='ios-notifications' size={iconSize} color={grayColor} style={styles.iconStyle}></Icon>
+            <Icon name='ios-notifications' size={iconSize} color={blueColor} style={styles.iconStyle}></Icon>
           </View>
           <View style={{ flex: 1, alignItems: 'center' }}>
             <Switch
@@ -75,7 +76,7 @@ class Mas_Main extends Component {
         <View >
           <TouchableOpacity  onPress={() => { this.props.navigation.navigate('Acerca') }}>
             <Text style={styles.textStyle}>Acerca de</Text>
-            <Icon name='ios-help-circle' size={iconSize} color={grayColor} style={styles.iconStyle}></Icon>
+            <Icon name='ios-help-circle' size={iconSize} color={blueColor} style={styles.iconStyle}></Icon>
           </TouchableOpacity>
         </View>
 
@@ -86,7 +87,7 @@ class Mas_Main extends Component {
         <View >
           <TouchableOpacity  onPress={() => { this.props.navigation.navigate('Info') }}>
             <Text style={styles.textStyle}>Información</Text>
-            <Icon name='md-information-circle' size={iconSize} color={grayColor} style={styles.iconStyle}></Icon>
+            <Icon name='md-information-circle' size={iconSize} color={blueColor} style={styles.iconStyle}></Icon>
           </TouchableOpacity>
         </View>
 
@@ -110,8 +111,8 @@ const styles = StyleSheet.create({
   },
   lineaOptionStyle: {
     height: 0.7,
-    width: "80%",
-    backgroundColor: blueColor
+    width: "90%",
+    backgroundColor: softGray
   },
 
   lineContainerVariante: {

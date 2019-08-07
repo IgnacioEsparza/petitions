@@ -8,6 +8,7 @@ var grayColor = Colores.grayColor;
 var blueColor = Colores.blueColor;
 var whiteColor = Colores.whiteColor;
 var redColor = Colores.redColor;
+var softGray = Colores.softGrayColor;
 
 var marginLeftGlobal = 20;
 
@@ -100,8 +101,8 @@ export default class Propuesta_Extend extends Component {
 
                     <TouchableOpacity style={styles.upVoteStyleBtn} onPress={this.votingUp.bind(this)}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={styles.textBtnStyle}>Apoya esta propuesta</Text>
-                            <Icon name='ios-heart' color={!this.state.pressUp ? whiteColor : redColor} size={18} style={{ margin: 8 }}></Icon>
+                            <Text style={styles.textBtnStyle}>Apoyar Propuesta</Text>
+                            <Icon name='ios-heart' color={!this.state.pressUp ? grayColor : redColor} size={18} style={{ margin: 8 }}></Icon>
                         </View>
                     </TouchableOpacity>
 
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
     lineaOptionStyle: {
         height: 0.9,
         width: "85%",
-        backgroundColor: blueColor
+        backgroundColor: softGray
     },
 
     lineContainer: {
@@ -204,16 +205,17 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: blueColor,
+        backgroundColor: softGray,
         borderRadius: 12,
     },
 
 
     textBtnStyle: {
-        color: whiteColor,
+        color: blueColor,
         fontSize: 14,
         textAlign: 'center',
-        marginLeft: 10
+        marginLeft: 10,
+        bottom: 1
     },
 
     btnContainer: {

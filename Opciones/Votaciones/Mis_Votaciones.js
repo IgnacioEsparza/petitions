@@ -8,6 +8,7 @@ var grayColor = Colores.grayColor;
 var blueColor = Colores.blueColor;
 var whiteColor = Colores.whiteColor;
 var redColor = Colores.redColor;
+var softGray = Colores.softGrayColor;
 
 var marginLeftGlobal = 20;
 
@@ -90,18 +91,18 @@ export default class Mis_Votaciones extends Component {
 
                 <View style={styles.btnContainer}>
 
-                    <View style={styles.upVoteStyle}>
+                    <View style={styles.VoteStyle}>
                         <Text>156 / 2000 Votos </Text>
                     </View>
 
-                    {/* <TouchableOpacity style={styles.upVoteStyle} onPress={this.votingDown.bind(this)} >
+                    {/* <TouchableOpacity style={styles.upVoteStyleBtn} onPress={this.votingDown.bind(this)} >
                         <Text><Icon name='md-arrow-dropdown-circle' color={!this.state.pressDown ? grayColor : 'red'} size={40}></Icon></Text>
                     </TouchableOpacity> */}
 
                     <TouchableOpacity style={styles.upVoteStyleBtn} onPress={this.votingUp.bind(this)}>
-                        <View style={{flexDirection:'row', alignItems:'center' }}>
-                        <Text style={styles.textBtnStyle}>Apoya esta propuesta</Text>
-                        <Icon name='ios-heart' color={!this.state.pressUp ? whiteColor : redColor} size={25} style={{margin:3}}></Icon>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={styles.textBtnStyle}>Apoyar Propuesta</Text>
+                            <Icon name='ios-heart' color={!this.state.pressUp ? grayColor : redColor} size={18} style={{ margin: 8 }}></Icon>
                         </View>
                     </TouchableOpacity>
 
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
     lineaOptionStyle: {
         height: 0.9,
         width: "85%",
-        backgroundColor: blueColor
+        backgroundColor: softGray
     },
 
     lineContainer: {
@@ -192,7 +193,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 
-    upVoteStyle: {
+    VoteStyle: {
         alignItems: 'center',
         justifyContent: 'center',
         marginRight: 8,
@@ -204,16 +205,17 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: blueColor,
+        backgroundColor: softGray,
         borderRadius: 12,
     },
 
 
     textBtnStyle: {
-        color: whiteColor,
-        fontSize: 16,
+        color: blueColor,
+        fontSize: 14,
         textAlign: 'center',
-        margin: 8
+        marginLeft: 10,
+        bottom: 1
     },
 
     btnContainer: {
