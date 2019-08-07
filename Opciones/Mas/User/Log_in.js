@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ActivityIndicator, Dimensions, TouchableOpacity, Text, ScrollView, ToastAndroid } from 'react-native';
+import { StyleSheet, View, Dimensions, TouchableOpacity, Text, ScrollView, ToastAndroid } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Entypo';
 
@@ -39,10 +39,7 @@ export default class Log_in extends Component {
             showPass: true,
             press: false,
 
-
             //Carga de datos de la api
-
-            loading: false,
             url: Api.api + 'login',
         }
     }
@@ -50,7 +47,6 @@ export default class Log_in extends Component {
     loginBtn = () => {
 
         ToastAndroid.show('Obteniendo Datos', ToastAndroid.SHORT);
-        //this.setState({ loading: true });
         fetch(this.state.url, {
             method: 'post',
             headers: {
@@ -76,13 +72,6 @@ export default class Log_in extends Component {
     }
 
     render() {
-        if (this.state.loading) {
-            return (
-                <View style={[styles.containerIndicator, styles.horizontalIndicator]}>
-                    <ActivityIndicator size={80} color={blueColor} />
-                </View>
-            );
-        }
         return (
             <View style={styles.MainContainer}>
                 <ScrollView>
@@ -94,10 +83,10 @@ export default class Log_in extends Component {
                         <View style={styles.inputContainer}>
                             <TextInput
                                 style={styles.inputStyle}
-                                placeholder={'Número Telefónico'}
+                                placeholder={'Correo Electrónico'}
                                 placeholderTextColor={whiteColor}
                                 underlineColorAndroid='transparent' />
-                            <Icon name='phone' color={whiteColor} size={20} style={styles.inputIconStyle} />
+                            <Icon name='email' color={whiteColor} size={20} style={styles.inputIconStyle} />
                         </View>
                         <View style={styles.inputContainer}>
                             <TextInput

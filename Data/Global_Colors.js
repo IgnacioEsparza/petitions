@@ -6,6 +6,7 @@ const globalColors = {
     blackColor: '#000000',
     redColor:'#F70D1A',
     textInputColor: '#9CB7CB',
+    softGrayColor: '#e0e0e0'
 }
 
 

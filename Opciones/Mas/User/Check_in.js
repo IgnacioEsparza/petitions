@@ -105,10 +105,10 @@ export default class Check_in extends Component {
                         <View style={styles.inputContainer}>
                             <TextInput
                                 style={styles.inputStyle}
-                                placeholder={'Número Telefónico'}
+                                placeholder={'Correo Electrónico'}
                                 placeholderTextColor={whiteColor}
                                 underlineColorAndroid='transparent' />
-                            <IconEntypo name='phone' color={whiteColor} size={20} style={styles.inputIconStyle} />
+                            <IconEntypo name='email' color={whiteColor} size={20} style={styles.inputIconStyle} />
                         </View>
                         <View style={styles.inputContainer}>
                             <TextInput
