@@ -72,7 +72,9 @@ class Votaciones_Main extends Component {
     parseData() {
         if (this.state.list && !this.state.empty) {
             return this.state.list.map((data, i) => {
+
                 return (
+
                     <View key={i} style={styles.listContainer}>
                         < View style={styles.listStyleRow} >
                             <IconMaterial name={data.icon} color={grayColor} size={20} />
@@ -86,17 +88,21 @@ class Votaciones_Main extends Component {
                             <View style={{ height: lineHeight, width: "100%", backgroundColor: blueColor }} />
                         </View>
                         < View style={styles.RowContainer} >
-                            <View style={styles.listStyleRowAdd}>
+                            {/* <View style={styles.listStyleRowAdd}>
                                 <Text style={styles.addInfoTextStyle}>{data.direccion}</Text>
-                            </View>
+                            </View> */}
+
                             <View style={styles.listStyleRowAdd}>
-                                <Text style={styles.addInfoTextStyle}>Votos: 99</Text>
+                                <Text style={styles.addInfoTextStyle}>
+                                    <IconMaterial name='account-multiple' color={whiteColor} size={15} />
+                                    &nbsp;&nbsp;&nbsp;Votos: 99</Text>
                             </View>
                         </View>
                         <TouchableOpacity onPress={() => { this.props.navigation.navigate('Vot', { data: data }) }}
                             style={styles.buttonListStyles}>
                         </TouchableOpacity >
                     </View >
+
                 )
             })
         } else {
@@ -108,6 +114,7 @@ class Votaciones_Main extends Component {
                     </View>
                 </View>)
         }
+
     }
 
     selectType() {
@@ -120,7 +127,7 @@ class Votaciones_Main extends Component {
                 {this.state.showDetail ? (
                     <View style={styles.MainContainer}>
                         <View style={styles.FragmentStyle}>
-                            <View style={{ height: lineHeight, width: "100%", backgroundColor: blueColor, marginTop: 15, marginBottom: 10 }} />
+                            <View style={{ height: lineHeight, width: "100%", backgroundColor: whiteColor, marginTop: 15, marginBottom: 10, elevation: 1 }} />
                             <FlatList data={this.state.listType} renderItem={({ item, index }) => {
                                 return (
                                     <View item={item} index={index} parentFlatList={this} style={styles.containerFlat}>
@@ -139,7 +146,7 @@ class Votaciones_Main extends Component {
                             }} keyExtractor={item => item.id.toString()} />
                         </View>
                     </View>) : null}
-                <View style={{ height: lineHeight, width: "100%", backgroundColor: blueColor, marginTop: 15, marginBottom: 10 }} />
+                <View style={{ height: lineHeight, width: "100%", backgroundColor: whiteColor, marginTop: 15, marginBottom: 10, elevation: 0.5 }} />
             </TouchableOpacity>
         );
     }
@@ -166,22 +173,22 @@ const styles = StyleSheet.create({
     },
     FragmentStyle: {
         flex: 18,
-        backgroundColor: whiteColor,
+        // backgroundColor: whiteColor,
     },
     // Estilos de Lista
     listContainer: {
         flex: 1,
         // flexDirection: 'row',
         padding: 10,
-        marginLeft: 16,
-        marginRight: 16,
+        marginLeft: 5,
+        marginRight: 5,
         marginTop: 8,
         marginBottom: 8,
-        borderRadius: 5,
+        // borderRadius: 5,
         backgroundColor: whiteColor,
-        borderColor: blueColor,
-        borderWidth: 2,
-        // elevation: 2,
+        // borderColor: blueColor,
+        // borderWidth: 2,
+        elevation: 2,
     },
     titleTextStyle: {
         fontSize: 20,
@@ -208,7 +215,12 @@ const styles = StyleSheet.create({
         fontSize: 11,
         fontStyle: 'italic',
         marginTop: 5,
-        color: grayColor,
+        color: whiteColor,
+        elevation: 0.2,
+        padding: 7,
+        borderRadius: 5,
+        borderColor: blueColor,
+        backgroundColor: blueColor
     },
     listStyle: {
         flex: 1,
@@ -225,7 +237,9 @@ const styles = StyleSheet.create({
     },
     listStyleRowAdd: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'flex-end',
+        marginRight: 15,
+        marginLeft: 20
     },
     typeRowStyle: {
         flex: 1,
@@ -233,6 +247,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginBottom: 5,
         justifyContent: 'center',
+        elevation: 2,
     },
     RowContainer: {
         flex: 1,
@@ -263,14 +278,12 @@ const styles = StyleSheet.create({
         marginBottom: 2,
         borderRadius: 5,
         backgroundColor: whiteColor,
-        elevation: 0,
         borderColor: blueColor,
         borderWidth: 1,
     },
     //Estilos lista vacia
     textContainer: {
         flex: 1,
-        alignItems: 'center',
         backgroundColor: whiteColor,
         marginBottom: 20,
         marginTop: 30
