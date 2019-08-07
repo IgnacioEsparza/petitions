@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, Dimensions, TouchableOpacity, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, ActivityIndicator, Dimensions, TouchableOpacity, Text, ScrollView, ToastAndroid } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Entypo';
 
 import Colores from '../../../Data/Global_Colors';
+import Api from '../../../Data/Api';
 
 var grayColor = Colores.grayColor;
 var blueColor = Colores.blueColor;
@@ -36,8 +37,38 @@ export default class Log_in extends Component {
         super()
         this.state = {
             showPass: true,
-            press: false
+            press: false,
+
+
+            //Carga de datos de la api
+
+            loading: false,
+            url: Api.api + 'login',
         }
+    }
+
+    loginBtn = () => {
+
+        ToastAndroid.show('Obteniendo Datos', ToastAndroid.SHORT);
+        //this.setState({ loading: true });
+        fetch(this.state.url, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: 'n.parra04@ufromail.cl',
+                password: 'copito'
+            })
+        })
+            .then(res => {
+                ToastAndroid.show(res.status.toString(), ToastAndroid.SHORT);
+                res.json()
+            })
+            .catch(err => {
+                ToastAndroid.show("Error "+err.toString(), ToastAndroid.LONG);
+            })
+
     }
 
     showPass = () => {
@@ -45,6 +76,13 @@ export default class Log_in extends Component {
     }
 
     render() {
+        if (this.state.loading) {
+            return (
+                <View style={[styles.containerIndicator, styles.horizontalIndicator]}>
+                    <ActivityIndicator size={80} color={blueColor} />
+                </View>
+            );
+        }
         return (
             <View style={styles.MainContainer}>
                 <ScrollView>

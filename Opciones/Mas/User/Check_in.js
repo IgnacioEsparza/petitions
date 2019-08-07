@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, Dimensions, TouchableOpacity, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, ActivityIndicator, Dimensions, TouchableOpacity, Text, ScrollView, ToastAndroid } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconAwesome from 'react-native-vector-icons/FontAwesome'
 
 import Colores from '../../../Data/Global_Colors';
+import ApiSignUp from '../../../Data/Api'
 
 var grayColor = Colores.grayColor;
 var blueColor = Colores.blueColor;
@@ -34,15 +35,49 @@ export default class Check_in extends Component {
         super()
         this.state = {
             showPass: true,
-            press: false
+            press: false,
+
+            //Carga de datos de la api
+            url: ApiSignUp.api + 'signup',
         }
     }
-    
+
     showPass = () => {
         this.setState({ showPass: !this.state.showPass, press: !this.state.press });
     }
 
+    registrarBtn = () => {
+
+        console.log('Obteniendo datos')
+        fetch(this.state.url, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: 'n.parra04@ufromail.cl',
+                displayName: 'Nicolas Parroquia',
+                password: 'copito'
+            })
+        })
+            .then(res => res.json())
+            .then(res => {
+                ToastAndroid.show(res.token.toString(), ToastAndroid.SHORT);
+            })
+            .catch(err => {
+                ToastAndroid.show("Error "+err.toString(), ToastAndroid.SHORT);
+            })
+            
+    }
+
     render() {
+        if (this.state.loading) {
+            return (
+                <View style={[styles.containerIndicator, styles.horizontalIndicator]}>
+                    <ActivityIndicator size={80} color={blueColor} />
+                </View>
+            );
+        }
         return (
             <View style={styles.MainContainer}>
                 <ScrollView>
@@ -87,7 +122,7 @@ export default class Check_in extends Component {
                                 <IconEntypo name={this.state.press == false ? 'eye' : 'eye-with-line'} color={whiteColor} size={20} />
                             </TouchableOpacity>
                         </View>
-                        <TouchableOpacity style={styles.loginBtnStyle} onPress={this.loginBtn}>
+                        <TouchableOpacity style={styles.loginBtnStyle} onPress={this.registrarBtn}>
                             <Text style={styles.textBtnStyle}>Registrarse</Text>
                         </TouchableOpacity>
                     </View>
