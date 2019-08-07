@@ -131,6 +131,34 @@ class Propuestas_Main extends Component {
     }
   }
 
+  categoria(category) {
+    switch (category) {
+      case PropuestasTipo[0].category:
+        return (PropuestasTipo[0].icon);
+
+      case PropuestasTipo[1].category:
+        return (PropuestasTipo[1].icon);
+
+      case PropuestasTipo[2].category:
+        return (PropuestasTipo[2].icon);
+
+      case PropuestasTipo[3].category:
+        return (PropuestasTipo[3].icon);
+
+      case PropuestasTipo[4].category:
+        return (PropuestasTipo[4].icon);
+
+      case PropuestasTipo[5].category:
+        return (PropuestasTipo[5].icon);
+
+      case PropuestasTipo[6].category:
+        return (PropuestasTipo[6].icon);
+
+      default:
+        return (PropuestasTipo[7].icon);
+    }
+  }
+
   parseData() {
 
     if (this.state.list && !this.state.empty) {
@@ -144,7 +172,7 @@ class Propuestas_Main extends Component {
                   <View item={item} parentFlatList={this} style={styles.listContainer} >
 
                     < View style={styles.listStyleRow} >
-                      <IconMaterial name={item.icon} color={blueColor} size={20} />
+                      <IconMaterial name={this.categoria(item.categoria)} color={blueColor} size={20} />
                       <Text style={styles.typePetitionStyle}>{item.categoria}</Text>
                     </View>
 
@@ -426,6 +454,7 @@ const styles = StyleSheet.create({
 
 
 import pExtendida from './Propuesta_Extend';
+import { switchCase } from '@babel/types';
 
 const AppNavigator = createStackNavigator({
   Inicio: { screen: Propuestas_Main },

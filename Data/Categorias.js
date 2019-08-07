@@ -34,6 +34,12 @@ var categorias = [
         category: 'Animales',
         icon: 'paw'
     },
+    ,
+    {
+        id: 6,
+        category: 'Uknown',
+        icon: 'file-question'
+    },
 ];
 
 module.exports = categorias;
