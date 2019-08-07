@@ -55,8 +55,8 @@ export default class Check_in extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: 'n.parra04@ufromail.cl',
-                displayName: 'Nicolas Parroquia',
+                email: 's.gonzalez12@ufromail.cl',
+                displayName: 'S Gonzalez',
                 password: 'copito'
             })
         })

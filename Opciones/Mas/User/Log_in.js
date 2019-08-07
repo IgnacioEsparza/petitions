@@ -54,15 +54,20 @@ export default class Log_in extends Component {
             },
             body: JSON.stringify({
                 email: 'n.parra04@ufromail.cl',
-                password: 'copito'
+                password: 'copiwto'
             })
         })
             .then(res => {
-                ToastAndroid.show(res.status.toString(), ToastAndroid.SHORT);
-                res.json()
+
+                if (res.status.toString() == '200') {
+                    this.props.navigation.navigate('Perfil')
+                } else {
+                    ToastAndroid.show('Contraseña Incorrecta', ToastAndroid.SHORT);
+                }
+                //res.json()
             })
             .catch(err => {
-                ToastAndroid.show("Error "+err.toString(), ToastAndroid.LONG);
+                ToastAndroid.show("Error " + err.toString(), ToastAndroid.LONG);
             })
 
     }

@@ -40,7 +40,7 @@ class Mas_Main extends Component {
       <View style={styles.MainContainer}>
 
         <View >
-          <TouchableOpacity onPress={() => { this.props.navigation.navigate('Perfil') }}>
+          <TouchableOpacity onPress={() => { this.props.navigation.navigate('Account') }}>
             <Text style={styles.textStyleMain}>Cuenta</Text>
             <Icon name='md-contact' size={30} color={blueColor} style={styles.iconStyleCuenta}></Icon>
           </TouchableOpacity>
