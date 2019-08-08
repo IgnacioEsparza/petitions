@@ -6,6 +6,8 @@ import Icon from 'react-native-vector-icons/Entypo';
 import Colores from '../../../Data/Global_Colors';
 import Api from '../../../Data/Api';
 
+import AsyncStorage from '@react-native-community/async-storage';
+
 var grayColor = Colores.grayColor;
 var blueColor = Colores.blueColor;
 var whiteColor = Colores.whiteColor;
@@ -45,6 +47,7 @@ export default class Log_in extends Component {
 
             //Carga de datos de la api
             url: Api.api + 'login',
+
         }
         this.handleChangeEmail = this.handleChangeEmail.bind(this);
         this.handleChangePassword = this.handleChangePassword.bind(this);
@@ -60,18 +63,23 @@ export default class Log_in extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: this.state.email,
-                password: this.state.pass
+                email: 'c.valenzuela06@ufromail.cl',
+                password: 'copito'
             })
         })
+
             .then(res => {
 
-                if (res.status.toString() == '200') {
-                    this.props.navigation.navigate('Perfil')
+                if (res.status == 200) {
+                    res.json().then(data => {
+                        AsyncStorage.setItem('token', data.token)
+                        this.props.navigation.navigate('Perfil')
+                    })
+
                 } else {
                     ToastAndroid.show('Contraseña Incorrecta', ToastAndroid.SHORT);
                 }
-                //res.json()
+
             })
             .catch(err => {
                 ToastAndroid.show("Error " + err.toString(), ToastAndroid.LONG);
@@ -79,11 +87,11 @@ export default class Log_in extends Component {
 
     }
 
-    handleChangeEmail(newValue) {
+    handleChangeEmail(newValue) { //Cambio estado valor input
         this.setState({ email: newValue })
     }
 
-    handleChangePassword(newValue) {
+    handleChangePassword(newValue) { //Cambio estado valor input
         this.setState({ pass: newValue })
     }
 

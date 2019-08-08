@@ -6,6 +6,8 @@ import Icon from 'react-native-vector-icons/Entypo';
 import Colores from '../../../Data/Global_Colors';
 import Api from '../../../Data/Api';
 
+//import AsyncStorage from '@react-native-community/async-storage';
+
 var input = Colores.textInputColor;
 var grayColor = Colores.grayColor;
 var softGray = Colores.softGrayColor;
@@ -13,6 +15,8 @@ var whiteColor = Colores.whiteColor;
 var blueColor = Colores.blueColor;
 var tam = 150;
 var iconSize = 20;
+
+var SECRET_TOKEN = 'petitionsecrettoken';
 
 const { width: WIDTH } = Dimensions.get('window');
 
@@ -38,14 +42,28 @@ export default class Perfil extends Component {
 
             loading: false,
             list: [],
-            url: Api.api + 'propuesta',
+            url: Api.api + 'user',
 
             //refreshing
             refreshing: false,
+
+            //campos iniciales perfil
+            name: '',
+            email: '',
+
         }
     }
 
+    loadUser() {
+
+        // const user = jwt.decode(AsyncStorage.getItem('token'), SECRET_TOKEN)
+        // console.log(user)
+
+    }
+
     render() {
+        this.loadUser()
+
         return (
             <View style={styles.MainContainer}>
                 <ScrollView>
@@ -62,9 +80,10 @@ export default class Perfil extends Component {
                         <Text style={styles.textStyle}>Nombre</Text>
                         <TextInput
                             style={styles.inputStyle}
-                            placeholder={'Juan Alberto'}
+                            //placeholder={'Juan Alberto'}
                             placeholderTextColor={blueColor}
-                            underlineColorAndroid='transparent' />
+                            underlineColorAndroid='transparent'
+                            defaultValue={this.state.name} />
                         <Icon name='v-card' color={blueColor} size={iconSize} style={styles.inputIconStyle} />
 
                     </View>
@@ -73,9 +92,10 @@ export default class Perfil extends Component {
                         <Text style={styles.textStyle}>Dirección E-mail</Text>
                         <TextInput
                             style={styles.inputStyle}
-                            placeholder={'juanalbertomail@elmail.pe'}
+                            //placeholder={'juanalbertomail@elmail.pe'}
                             placeholderTextColor={blueColor}
-                            underlineColorAndroid='transparent' />
+                            underlineColorAndroid='transparent'
+                            defaultValue={this.state.email} />
                         <Icon name='email' color={blueColor} size={iconSize} style={styles.inputIconStyle} />
                     </View>
 
