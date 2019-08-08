@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
 
 import Account_nav from './User/Account_nav';
 import Log_in from './User/Log_in';
-import Check_in from './User/Check_in';
+import Sign_up from './User/Sign_up';
 import Acerca_de from './Acerca_De';
 import Informacion from './Informacion';
 import Perfil from './User/Perfil';
@@ -164,7 +164,7 @@ const AppNavigator = createStackNavigator({
   Inicio: { screen: Mas_Main },
   Account: { screen: Account_nav },
   Login: { screen: Log_in },
-  Checkin: { screen: Check_in },
+  Checkin: { screen: Sign_up },
   Acerca: { screen: Acerca_de },
   Info: { screen: Informacion },
   Perfil: {screen: Perfil}

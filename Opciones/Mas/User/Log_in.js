@@ -39,9 +39,16 @@ export default class Log_in extends Component {
             showPass: true,
             press: false,
 
+            //Valores iniciales variables input
+            email: '',
+            pass: '',
+
             //Carga de datos de la api
             url: Api.api + 'login',
         }
+        this.handleChangeEmail = this.handleChangeEmail.bind(this);
+        this.handleChangePassword = this.handleChangePassword.bind(this);
+
     }
 
     loginBtn = () => {
@@ -53,8 +60,8 @@ export default class Log_in extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: 'n.parra04@ufromail.cl',
-                password: 'copiwto'
+                email: this.state.email,
+                password: this.state.pass
             })
         })
             .then(res => {
@@ -70,6 +77,14 @@ export default class Log_in extends Component {
                 ToastAndroid.show("Error " + err.toString(), ToastAndroid.LONG);
             })
 
+    }
+
+    handleChangeEmail(newValue) {
+        this.setState({ email: newValue })
+    }
+
+    handleChangePassword(newValue) {
+        this.setState({ pass: newValue })
     }
 
     showPass = () => {
@@ -90,7 +105,8 @@ export default class Log_in extends Component {
                                 style={styles.inputStyle}
                                 placeholder={'Correo Electrónico'}
                                 placeholderTextColor={whiteColor}
-                                underlineColorAndroid='transparent' />
+                                underlineColorAndroid='transparent'
+                                onChangeText={this.handleChangeEmail} />
                             <Icon name='email' color={whiteColor} size={20} style={styles.inputIconStyle} />
                         </View>
                         <View style={styles.inputContainer}>
@@ -99,7 +115,8 @@ export default class Log_in extends Component {
                                 placeholder={'Contraseña'}
                                 secureTextEntry={this.state.showPass}
                                 placeholderTextColor={whiteColor}
-                                underlineColorAndroid='transparent' />
+                                underlineColorAndroid='transparent'
+                                onChangeText={this.handleChangePassword} />
                             <Icon name='lock-open' color={whiteColor} size={20} style={styles.inputIconStyle} />
                             <TouchableOpacity style={styles.eyeBtnStyle} onPress={this.showPass.bind(this)}>
                                 <Icon name={this.state.press == false ? 'eye' : 'eye-with-line'} color={whiteColor} size={20} />

@@ -34,9 +34,8 @@ var categorias = [
         category: 'Animales',
         icon: 'paw'
     },
-    ,
     {
-        id: 6,
+        id: 7,
         category: 'Uknown',
         icon: 'file-question'
     },

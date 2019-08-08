@@ -15,7 +15,7 @@ var input = Colores.textInputColor;
 
 const { width: WIDTH } = Dimensions.get('window');
 
-export default class Check_in extends Component {
+export default class Sign_up extends Component {
 
     static navigationOptions = {
         title: 'Registrarse',
@@ -37,13 +37,39 @@ export default class Check_in extends Component {
             showPass: true,
             press: false,
 
+            //Valores iniciales variables registro
+            name: '',
+            lastname: '',
+            email: '',
+            pass: '',
+
             //Carga de datos de la api
             url: ApiSignUp.api + 'signup',
         }
+        this.handleChangeName = this.handleChangeName.bind(this);
+        this.handleChangeLastName = this.handleChangeLastName.bind(this);
+        this.handleChangeEmail = this.handleChangeEmail.bind(this);
+        this.handleChangePassword = this.handleChangePassword.bind(this);
     }
 
     showPass = () => {
         this.setState({ showPass: !this.state.showPass, press: !this.state.press });
+    }
+
+    handleChangeName(newValue) {
+        this.setState({ name: newValue })
+    }
+
+    handleChangeLastName(newValue) {
+        this.setState({ lastname: newValue })
+    }
+
+    handleChangeEmail(newValue) {
+        this.setState({ email: newValue })
+    }
+
+    handleChangePassword(newValue) {
+        this.setState({ pass: newValue })
     }
 
     registrarBtn = () => {
@@ -55,9 +81,9 @@ export default class Check_in extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: 's.gonzalez12@ufromail.cl',
-                displayName: 'S Gonzalez',
-                password: 'copito'
+                email: this.state.email,
+                displayName: this.state.name + ' ' + this.state.lastname,
+                password: this.state.pass
             })
         })
             .then(res => res.json())
@@ -65,9 +91,9 @@ export default class Check_in extends Component {
                 ToastAndroid.show(res.token.toString(), ToastAndroid.SHORT);
             })
             .catch(err => {
-                ToastAndroid.show("Error "+err.toString(), ToastAndroid.SHORT);
+                ToastAndroid.show("Error " + err.toString(), ToastAndroid.SHORT);
             })
-            
+
     }
 
     render() {
@@ -91,7 +117,8 @@ export default class Check_in extends Component {
                                 style={styles.inputStyle}
                                 placeholder={'Nombre'}
                                 placeholderTextColor={whiteColor}
-                                underlineColorAndroid='transparent' />
+                                underlineColorAndroid='transparent'
+                                onChangeText={this.handleChangeName} />
                             <IconAwesome name='drivers-license-o' color={whiteColor} size={20} style={styles.inputIconStyle} />
                         </View>
                         <View style={styles.inputContainer}>
@@ -99,7 +126,8 @@ export default class Check_in extends Component {
                                 style={styles.inputStyle}
                                 placeholder={'Apellido'}
                                 placeholderTextColor={whiteColor}
-                                underlineColorAndroid='transparent' />
+                                underlineColorAndroid='transparent'
+                                onChangeText={this.handleChangeLastName} />
                             <IconAwesome name='drivers-license' color={whiteColor} size={20} style={styles.inputIconStyle} />
                         </View>
                         <View style={styles.inputContainer}>
@@ -107,7 +135,8 @@ export default class Check_in extends Component {
                                 style={styles.inputStyle}
                                 placeholder={'Correo Electrónico'}
                                 placeholderTextColor={whiteColor}
-                                underlineColorAndroid='transparent' />
+                                underlineColorAndroid='transparent'
+                                onChangeText={this.handleChangeEmail} />
                             <IconEntypo name='email' color={whiteColor} size={20} style={styles.inputIconStyle} />
                         </View>
                         <View style={styles.inputContainer}>
@@ -116,7 +145,8 @@ export default class Check_in extends Component {
                                 placeholder={'Contraseña'}
                                 secureTextEntry={this.state.showPass}
                                 placeholderTextColor={whiteColor}
-                                underlineColorAndroid='transparent' />
+                                underlineColorAndroid='transparent'
+                                onChangeText={this.handleChangePassword} />
                             <IconEntypo name='lock-open' color={whiteColor} size={20} style={styles.inputIconStyle} />
                             <TouchableOpacity style={styles.eyeBtnStyle} onPress={this.showPass.bind(this)}>
                                 <IconEntypo name={this.state.press == false ? 'eye' : 'eye-with-line'} color={whiteColor} size={20} />
