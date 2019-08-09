@@ -6,7 +6,6 @@ import Icon from 'react-native-vector-icons/Entypo';
 import Colores from '../../../Data/Global_Colors';
 import Api from '../../../Data/Api';
 
-import AsyncStorage from '@react-native-community/async-storage';
 
 var grayColor = Colores.grayColor;
 var blueColor = Colores.blueColor;
@@ -56,28 +55,25 @@ export default class Log_in extends Component {
 
     loginBtn = () => {
 
-        ToastAndroid.show('Obteniendo Datos', ToastAndroid.SHORT);
         fetch(this.state.url, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: 'c.valenzuela06@ufromail.cl',
-                password: 'copito'
+                email: this.state.email.toString().replace(/ /g, ''),
+                password: this.state.pass.toString()
             })
         })
 
             .then(res => {
-
                 if (res.status == 200) {
                     res.json().then(data => {
-                        AsyncStorage.setItem('token', data.token)
                         this.props.navigation.navigate('Perfil')
                     })
 
                 } else {
-                    ToastAndroid.show('Contraseña Incorrecta', ToastAndroid.SHORT);
+                    ToastAndroid.show('Contraseña o Email no válidos', ToastAndroid.SHORT);
                 }
 
             })
