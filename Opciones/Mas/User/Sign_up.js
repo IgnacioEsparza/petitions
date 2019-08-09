@@ -86,12 +86,12 @@ export default class Sign_up extends Component {
                 password: this.state.pass
             })
         })
-            .then(res => res.json())
             .then(res => {
-                ToastAndroid.show(res.token.toString(), ToastAndroid.SHORT);
-            })
-            .catch(err => {
-                ToastAndroid.show("Error " + err.toString(), ToastAndroid.SHORT);
+                if (res.status == 422) {
+                    ToastAndroid.show('Todos los campos son obligatorios', ToastAndroid.SHORT);
+                } else {
+                    ToastAndroid.show('Otro', ToastAndroid.SHORT);
+                }
             })
 
     }

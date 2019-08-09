@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Dimensions, TouchableOpacity, Text, ScrollView, ToastAndroid } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Entypo';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import Colores from '../../../Data/Global_Colors';
 import Api from '../../../Data/Api';
