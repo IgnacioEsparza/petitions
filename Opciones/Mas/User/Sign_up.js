@@ -74,36 +74,45 @@ export default class Sign_up extends Component {
 
     registrarBtn = () => {
 
-        console.log('Obteniendo datos')
-        fetch(this.state.url, {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: this.state.email,
-                displayName: this.state.name + ' ' + this.state.lastname,
-                password: this.state.pass
+        if (this.validateEmail()) {
+            fetch(this.state.url, {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: this.state.email.toString().replace(/ /g, ''),
+                    displayName: this.state.name.toString() + ' ' + this.state.lastname.toString(),
+                    password: this.state.pass.toString()
+                })
             })
-        })
-            .then(res => {
-                if (res.status == 422) {
-                    ToastAndroid.show('Todos los campos son obligatorios', ToastAndroid.SHORT);
-                } else {
-                    ToastAndroid.show('Otro', ToastAndroid.SHORT);
-                }
-            })
+                .then(res => {
+                    if (res.status == 422) {
+                        ToastAndroid.show('Todos los campos son obligatorios', ToastAndroid.SHORT);
+                    } else {
+                        ToastAndroid.show('Otro', ToastAndroid.SHORT);
+                    }
+                })
+
+        } else {
+            ToastAndroid.show('Dirección de Correo Electrónico Inválido', ToastAndroid.SHORT);
+        }
+
 
     }
 
-    render() {
-        if (this.state.loading) {
-            return (
-                <View style={[styles.containerIndicator, styles.horizontalIndicator]}>
-                    <ActivityIndicator size={80} color={blueColor} />
-                </View>
-            );
+    validateEmail() {
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+        if (reg.test(this.state.email.toString().replace(/ /g, ''))) {
+            return (true);
+        } else {
+            return (false);
         }
+    }
+
+    render() {
+       
         return (
             <View style={styles.MainContainer}>
                 <ScrollView>
