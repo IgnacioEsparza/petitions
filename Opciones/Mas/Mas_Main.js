@@ -3,6 +3,8 @@ import { StyleSheet, View, Text, TouchableOpacity, Switch } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colores from '../../Data/Global_Colors';
+import AsyncStorage from '@react-native-community/async-storage';
+import Api from '../../Data/Api';
 
 var grayColor = Colores.grayColor;
 var blueColor = Colores.blueColor;
@@ -29,18 +31,71 @@ class Mas_Main extends Component {
     super();
     this.state = {
       switchValue: false,
+      token: '',
+      url: Api.api + 'user',
+      user: [],
     }
+  }
+
+  getData = async () => {
+
+    try {
+      var token = await AsyncStorage.getItem('token')
+    } catch (e) {
+      console.log(e)
+    }
+    this.setState({ token: token })
+
+  }
+
+  loadUser() {
+
+    if (this.state.token == null || this.state.token == '') {
+
+      this.getData()
+
+    } else {
+
+      if (this.state.user.length == 0) {
+        fetch(this.state.url, {
+          method: 'get',
+          headers: {
+            'Authorization': 'bearer ' + this.state.token
+          }
+        })
+          .then(res => res.json())
+          .then(res => {
+            this.setState({ user: res.user })
+          })
+      }
+
+    }
+
+  }
+
+  logOut() {
+    AsyncStorage.removeItem('token')
+    this.setState({ token: this.state.token = '' })
+    console.log(this.state.token)
   }
 
   render() {
 
     var iconSize = 20;
 
+    this.loadUser()
+
     return (
       <View style={styles.MainContainer}>
 
         <View >
-          <TouchableOpacity onPress={() => { this.props.navigation.navigate('Account') }}>
+          <TouchableOpacity onPress={() => {
+            if (this.state.token) {
+              this.props.navigation.navigate('Perfil', { usuario: this.state.user })
+            } else {
+              this.props.navigation.navigate('Account')
+            }
+          }}>
             <Text style={styles.textStyleMain}>Cuenta</Text>
             <Icon name='md-contact' size={30} color={blueColor} style={styles.iconStyleCuenta}></Icon>
           </TouchableOpacity>
@@ -74,7 +129,7 @@ class Mas_Main extends Component {
         </View>
 
         <View >
-          <TouchableOpacity  onPress={() => { this.props.navigation.navigate('Acerca') }}>
+          <TouchableOpacity onPress={() => { this.props.navigation.navigate('Acerca') }}>
             <Text style={styles.textStyle}>Acerca de</Text>
             <Icon name='ios-help-circle' size={iconSize} color={blueColor} style={styles.iconStyle}></Icon>
           </TouchableOpacity>
@@ -85,9 +140,20 @@ class Mas_Main extends Component {
         </View>
 
         <View >
-          <TouchableOpacity  onPress={() => { this.props.navigation.navigate('Info') }}>
+          <TouchableOpacity onPress={() => { this.props.navigation.navigate('Info') }}>
             <Text style={styles.textStyle}>Información</Text>
             <Icon name='md-information-circle' size={iconSize} color={blueColor} style={styles.iconStyle}></Icon>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.lineContainer}>
+          <View style={styles.lineaOptionStyle} />
+        </View>
+
+        <View >
+          <TouchableOpacity onPress={() => this.logOut()}>
+            <Text style={styles.textStyle}>Cerrar sesión</Text>
+            <Icon name='md-log-out' size={iconSize} color={blueColor} style={styles.iconStyle}></Icon>
           </TouchableOpacity>
         </View>
 
@@ -161,13 +227,13 @@ import Informacion from './Informacion';
 import Perfil from './User/Perfil';
 
 const AppNavigator = createStackNavigator({
-  Inicio: { screen: Mas_Main },
+  Mas: { screen: Mas_Main },
   Account: { screen: Account_nav },
   Login: { screen: Log_in },
   Checkin: { screen: Sign_up },
   Acerca: { screen: Acerca_de },
   Info: { screen: Informacion },
-  Perfil: {screen: Perfil}
+  Perfil: { screen: Perfil }
 });
 
 export default createAppContainer(AppNavigator);

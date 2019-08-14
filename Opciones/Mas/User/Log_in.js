@@ -47,6 +47,7 @@ export default class Log_in extends Component {
 
             //Carga de datos de la api
             url: Api.api + 'login',
+            // user: [],
 
         }
         this.handleChangeEmail = this.handleChangeEmail.bind(this);
@@ -59,7 +60,7 @@ export default class Log_in extends Component {
         fetch(this.state.url, {
             method: 'post',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 email: this.state.email.toString().replace(/ /g, ''),
@@ -70,7 +71,10 @@ export default class Log_in extends Component {
             .then(res => {
                 if (res.status == 200) {
                     res.json().then(data => {
-                        this.props.navigation.navigate('Perfil')
+                        AsyncStorage.setItem('token', data.token)
+                        ToastAndroid.show('Ingreso Exitoso', ToastAndroid.SHORT)
+                        this.props.navigation.navigate('Mas')
+                        this.props.navigation.navigate('Inicio')
                     })
 
                 } else {
