@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, ActivityIndicator, Dimensions, TouchableOpacity, Text, ScrollView, ToastAndroid } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import IconEntypo from 'react-native-vector-icons/Entypo';
-import IconAwesome from 'react-native-vector-icons/FontAwesome'
+import IconAwesome from 'react-native-vector-icons/FontAwesome';
 
 import Colores from '../../../Data/Global_Colors';
 import ApiSignUp from '../../../Data/Api'
@@ -17,6 +17,7 @@ const { width: WIDTH } = Dimensions.get('window');
 
 export default class Sign_up extends Component {
 
+    //Opciones de el header
     static navigationOptions = {
         title: 'Registrarse',
         headerStyle: {
@@ -31,6 +32,7 @@ export default class Sign_up extends Component {
         }
     }
 
+    //El constructor con la incialización de los states
     constructor() {
         super()
         this.state = {
@@ -52,10 +54,15 @@ export default class Sign_up extends Component {
         this.handleChangePassword = this.handleChangePassword.bind(this);
     }
 
+    //------------------------------------------------------------
+    //Acciones de los botones
+
+    //Muestra y oculta la contraseña
     showPass = () => {
         this.setState({ showPass: !this.state.showPass, press: !this.state.press });
     }
 
+    //Acciones encargadas del CRUD
     handleChangeName(newValue) {
         this.setState({ name: newValue })
     }
@@ -72,6 +79,7 @@ export default class Sign_up extends Component {
         this.setState({ pass: newValue })
     }
 
+    //Encargado de enviar los datos de registro a la API
     registrarBtn = () => {
 
         if (this.validateEmail()) {
@@ -97,10 +105,10 @@ export default class Sign_up extends Component {
         } else {
             ToastAndroid.show('Dirección de Correo Electrónico Inválido', ToastAndroid.SHORT);
         }
-
-
     }
+    //-----------------------------------------------------------------
 
+    //valida la correcta sintaxis para un correo
     validateEmail() {
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -111,8 +119,9 @@ export default class Sign_up extends Component {
         }
     }
 
+    //render de las vistas
     render() {
-       
+
         return (
             <View style={styles.MainContainer}>
                 <ScrollView>
@@ -171,6 +180,8 @@ export default class Sign_up extends Component {
     }
 }
 
+
+//estilos de las vistas
 const styles = StyleSheet.create({
     MainContainer: {
         flex: 1,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Dimensions, TouchableOpacity, Text, ScrollView, Image } from 'react-native';
+import { StyleSheet, View, Dimensions, TouchableOpacity, Text, ScrollView, Image, ToastAndroid } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Entypo';
 
@@ -50,6 +50,10 @@ export default class Perfil extends Component {
             email: '',
 
         }
+    }
+
+    componentDidMount() {
+        ToastAndroid.show('Queeee tal!! ', ToastAndroid.SHORT)
     }
 
     render() {

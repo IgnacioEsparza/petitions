@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Switch } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Switch, ActivityIndicator, ToastAndroid } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
+
 import Icon from 'react-native-vector-icons/Ionicons';
-import Colores from '../../Data/Global_Colors';
 import AsyncStorage from '@react-native-community/async-storage';
+import Dialog from "react-native-dialog";
+
+import Colores from '../../Data/Global_Colors';
 import Api from '../../Data/Api';
 
 var grayColor = Colores.grayColor;
@@ -31,12 +34,18 @@ class Mas_Main extends Component {
     super();
     this.state = {
       switchValue: false,
+      dialogVisible: false,
+      sesion: false,
+      loading: false,
+
+      //variables de la API
       token: '',
       url: Api.api + 'user',
       user: [],
     }
   }
 
+  //-----------------------------------------
   getData = async () => {
 
     try {
@@ -45,10 +54,11 @@ class Mas_Main extends Component {
       console.log(e)
     }
     this.setState({ token: token })
-
   }
 
-  loadUser() {
+  loadUser = () => {
+
+    //this.setState({ loading: true })
 
     if (this.state.token == null || this.state.token == '') {
 
@@ -71,6 +81,8 @@ class Mas_Main extends Component {
 
     }
 
+    //this.setState({ loading: false })
+
   }
 
   logOut() {
@@ -79,17 +91,51 @@ class Mas_Main extends Component {
     console.log(this.state.token)
   }
 
+  //----------------------------------------------
+
+  showDialog = () => {
+    if (this.state.token) {
+      this.setState({ dialogVisible: true });
+    } else {
+      this.setState({ sesion: true })
+    }
+
+  };
+
+  handleCancel = () => {
+    this.setState({
+      dialogVisible: false,
+      sesion: false
+    });
+  };
+
+  handleAccept = () => {
+    this.logOut();
+    this.setState({ dialogVisible: false });
+  };
+
+  //------------------------------------------------
+
   render() {
+
+    this.loadUser();
 
     var iconSize = 20;
 
-    this.loadUser()
+    // if (this.state.loading) {
+    //   return (
+    //     <View style={[styles.containerIndicator, styles.horizontalIndicator]}>
+    //       <ActivityIndicator size={80} color={blueColor} />
+    //     </View>
+    //   );
+    // }
 
     return (
       <View style={styles.MainContainer}>
 
         <View >
           <TouchableOpacity onPress={() => {
+
             if (this.state.token) {
               this.props.navigation.navigate('Perfil', { usuario: this.state.user })
             } else {
@@ -151,9 +197,24 @@ class Mas_Main extends Component {
         </View>
 
         <View >
-          <TouchableOpacity onPress={() => this.logOut()}>
+          <TouchableOpacity onPress={this.showDialog}>
+
             <Text style={styles.textStyle}>Cerrar sesión</Text>
             <Icon name='md-log-out' size={iconSize} color={blueColor} style={styles.iconStyle}></Icon>
+
+            <Dialog.Container visible={this.state.dialogVisible}>
+              <Dialog.Title>Cerrar Sesión</Dialog.Title>
+              <Dialog.Description>¿Deseas cerrar sesión?</Dialog.Description>
+              <Dialog.Button label="Cancelar" onPress={this.handleCancel} />
+              <Dialog.Button label="Aceptar" onPress={this.handleAccept} />
+            </Dialog.Container>
+
+            <Dialog.Container visible={this.state.sesion}>
+              <Dialog.Title>No Has Iniciado Sesión</Dialog.Title>
+              <Dialog.Description>Para cerrar la sesión debes haber ingresado con tus credenciales.</Dialog.Description>
+              <Dialog.Button label="Aceptar" onPress={this.handleCancel} />
+            </Dialog.Container>
+
           </TouchableOpacity>
         </View>
 

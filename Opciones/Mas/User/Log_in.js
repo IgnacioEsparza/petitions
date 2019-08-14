@@ -72,7 +72,7 @@ export default class Log_in extends Component {
                 if (res.status == 200) {
                     res.json().then(data => {
                         AsyncStorage.setItem('token', data.token)
-                        ToastAndroid.show('Ingreso Exitoso', ToastAndroid.SHORT)
+                        ToastAndroid.show('Ingreso Exitoso ', ToastAndroid.SHORT)
                         this.props.navigation.navigate('Mas')
                         this.props.navigation.navigate('Inicio')
                     })
