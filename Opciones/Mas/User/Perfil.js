@@ -16,8 +16,6 @@ var blueColor = Colores.blueColor;
 var tam = 150;
 var iconSize = 20;
 
-var SECRET_TOKEN = 'petitionsecrettoken';
-
 const { width: WIDTH } = Dimensions.get('window');
 
 export default class Perfil extends Component {
@@ -54,15 +52,8 @@ export default class Perfil extends Component {
         }
     }
 
-    loadUser() {
-
-        // const user = jwt.decode(AsyncStorage.getItem('token'), SECRET_TOKEN)
-        // console.log(user)
-
-    }
-
     render() {
-        this.loadUser()
+        var user = this.props.navigation.state.params.usuario
 
         return (
             <View style={styles.MainContainer}>
@@ -83,7 +74,7 @@ export default class Perfil extends Component {
                             //placeholder={'Juan Alberto'}
                             placeholderTextColor={blueColor}
                             underlineColorAndroid='transparent'
-                            defaultValue={this.state.name} />
+                            defaultValue={user.displayName} />
                         <Icon name='v-card' color={blueColor} size={iconSize} style={styles.inputIconStyle} />
 
                     </View>
@@ -95,7 +86,7 @@ export default class Perfil extends Component {
                             //placeholder={'juanalbertomail@elmail.pe'}
                             placeholderTextColor={blueColor}
                             underlineColorAndroid='transparent'
-                            defaultValue={this.state.email} />
+                            defaultValue={user.email} />
                         <Icon name='email' color={blueColor} size={iconSize} style={styles.inputIconStyle} />
                     </View>
 
@@ -145,7 +136,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         paddingLeft: 40,
         backgroundColor: softGray,
-        color: whiteColor,
+        color: blueColor,
         marginHorizontal: 25,
     },
 
