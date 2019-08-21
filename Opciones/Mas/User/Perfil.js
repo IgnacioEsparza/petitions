@@ -53,7 +53,7 @@ export default class Perfil extends Component {
     }
 
     componentDidMount() {
-        ToastAndroid.show('Queeee tal!! ', ToastAndroid.SHORT)
+        //ToastAndroid.show('Queeee tal!! ', ToastAndroid.SHORT)
     }
 
     render() {

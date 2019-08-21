@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, ToastAndroid } from 'react-native';
 import Colores from '../../Data/Global_Colors'
 
 import Icon from 'react-native-vector-icons/Ionicons';
+
+import AsyncStorage from '@react-native-community/async-storage';
+import Api from '../../Data/Api';
 
 var grayColor = Colores.grayColor;
 var blueColor = Colores.blueColor;
@@ -35,6 +38,9 @@ export default class Propuesta_Extend extends Component {
             vote: true,
             pressUp: false,
             pressDown: false,
+
+            url: Api.api + '/propuesta/apoyar/',
+            token: '',
         };
     }
 
@@ -51,6 +57,59 @@ export default class Propuesta_Extend extends Component {
 
         if (this.state.pressUp) {
             this.setState({ vote: !this.state.vote, pressUp: !this.state.pressUp });
+        }
+    }
+
+    getData = async () => {
+
+        try {
+            var token = await AsyncStorage.getItem('token')
+            // console.log(token)
+            // this.setState({ token: token })
+        } catch (e) {
+            console.log(e)
+        }
+        this.setState({ token: token })
+    }
+
+    async addProposeUser(proposeId) {
+        if (this.state.token == null || this.state.token == '') {
+
+            await this.getData()
+
+            fetch(this.state.url + proposeId, {
+                method: 'put',
+                headers: {
+                    'Authorization': 'bearer ' + this.state.token
+                }
+            })
+                .then(res => {
+                    if (res.status == 200) {
+                        ToastAndroid.show('Propuesta Apoyada', ToastAndroid.SHORT)
+                    } else {
+                        if (res.status == 404) {
+                            ToastAndroid.show('Esta propuesta ya fue apoyada', ToastAndroid.SHORT)
+                        }
+                    }
+                })
+
+        } else {
+
+            fetch(this.state.url + proposeId, {
+                method: 'put',
+                headers: {
+                    'Authorization': 'bearer ' + this.state.token
+                }
+            })
+                .then(res => {
+                    if (res.status == 200) {
+                        ToastAndroid.show('Propuesta Apoyada', ToastAndroid.SHORT)
+                    } else {
+                        if (res.status == 404) {
+                            ToastAndroid.show('Esta propuesta ya fue apoyada', ToastAndroid.SHORT)
+                        }
+                    }
+                })
         }
     }
 
@@ -99,7 +158,10 @@ export default class Propuesta_Extend extends Component {
                         <Text><Icon name='md-arrow-dropdown-circle' color={!this.state.pressDown ? grayColor : 'red'} size={40}></Icon></Text>
                     </TouchableOpacity> */}
 
-                    <TouchableOpacity style={styles.upVoteStyleBtn} onPress={this.votingUp.bind(this)}>
+                    <TouchableOpacity style={styles.upVoteStyleBtn} onPress={() => {
+                        this.votingUp.bind(this);
+                        this.addProposeUser(proposal._id)
+                    }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={styles.textBtnStyle}>Apoyar Propuesta</Text>
                             <Icon name='ios-heart' color={!this.state.pressUp ? grayColor : redColor} size={18} style={{ margin: 8 }}></Icon>
@@ -226,7 +288,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         borderTopColor: softGray,
         borderColor: softGray,
-        borderWidth:1,
+        borderWidth: 1,
     },
 
 });
