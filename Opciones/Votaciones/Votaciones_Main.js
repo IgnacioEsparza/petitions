@@ -3,9 +3,11 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Animated, TouchableOpacity, ScrollView, Text, ToastAndroid, FlatList } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
+import AsyncStorage from '@react-native-community/async-storage';
+
+import Api from '../../Data/Api';
 import IncidenciaData from '../../Data/Propuestas';
 import PropuestasTipo from '../../Data/Categorias';
-
 import Colores from '../../Data/Global_Colors'
 
 var grayColor = Colores.grayColor;
@@ -39,12 +41,30 @@ class Votaciones_Main extends Component {
             listType: PropuestasTipo,
             showDetail: false,
             proposalType: 'Filtrar Categoría',
+
+            //Carga de datos de la api
+            loading: false,
+            list: [],
+            fullList: [],
+            url: Api.api + 'propuesta',
+            urlProp: Api.api + 'propuesta',
+            token: '',
         }
     }
 
-    // ingresarIncidenciaBtn = () => {
-    //   this.props.navigation.navigate('Ing')
-    // };
+    getData = async () => {
+
+        if (this.state.token == null || this.state.token == '') {
+            try {
+                var token = await AsyncStorage.getItem('token')
+                // console.log(token)
+                // this.setState({ token: token })
+            } catch (e) {
+                console.log(e)
+            }
+            this.setState({ token: token })
+        }
+    }
 
     search(txt) { // metodo de busqueda por categoría, verifica la existencia de propuestas por categoría
         var cont = 0;
@@ -70,38 +90,40 @@ class Votaciones_Main extends Component {
         this.setState({ showDetail: !this.state.showDetail });
     };
 
-    parseData() {
+    parseData = async () => {
+
+        await this.getData();
+
         if (this.state.list && !this.state.empty) {
             return this.state.list.map((data, i) => {
 
                 return (
 
                     <View key={i} style={styles.listContainer}>
+
                         < View style={styles.listStyleRow} >
                             <IconMaterial name={data.icon} color={blueColor} size={20} />
                             <Text style={styles.typePetitionStyle}>{data.categoria}</Text>
                         </View>
+
                         <View style={styles.listStyle} >
                             <View style={{ height: lineHeight, width: "100%", backgroundColor: softGray }} />
                             <Text style={styles.titleTextStyle}>{data.title}</Text>
-                            <View style={{ height: lineHeight, width: "60%", backgroundColor: softGray }} />
-                            <Text style={styles.infoTextStyle}>{data.descripcion}</Text>
                             <View style={{ height: lineHeight, width: "100%", backgroundColor: softGray }} />
                         </View>
-                        < View style={styles.RowContainer} >
-                            {/* <View style={styles.listStyleRowAdd}>
-                                <Text style={styles.addInfoTextStyle}>{data.direccion}</Text>
-                            </View> */}
 
+                        < View style={styles.RowContainer} >
                             <View style={styles.listStyleRowAdd}>
                                 <Text style={styles.addInfoTextStyle}>
                                     <IconMaterial name='account-multiple' color={blueColor} size={15} />
                                     &nbsp;&nbsp;&nbsp;Votos: 99</Text>
                             </View>
                         </View>
+
                         <TouchableOpacity onPress={() => { this.props.navigation.navigate('Vot', { data: data }) }}
                             style={styles.buttonListStyles}>
                         </TouchableOpacity >
+
                     </View >
 
                 )
@@ -112,9 +134,6 @@ class Votaciones_Main extends Component {
                     <View style={{ height: lineHeight, width: "90%", backgroundColor: softGray, marginBottom: 10, marginTop: 5 }} ></View>
                     <View style={styles.textContainer}>
                         <Text style={styles.labelStyle}>No existen propuestas en esta categoría actualmente</Text>
-                        <View style={styles.imagenContainer}>
-                            {/* <Image source={require('../../Assets/Images/cat.png')} style={styles.imagenStyle} resizeMode="contain" /> */}
-                        </View>
                     </View>
                 </View>
             )
@@ -309,8 +328,7 @@ const styles = StyleSheet.create({
     },
 });
 
-import misVotaciones from './Mis_Votaciones';
-import { blue } from 'ansi-colors';
+import misVotaciones from './Votaciones_Extend';
 
 const AppNavigator = createStackNavigator({
     Inicio: { screen: Votaciones_Main },

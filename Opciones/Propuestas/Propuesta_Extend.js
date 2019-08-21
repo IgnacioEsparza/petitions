@@ -41,7 +41,7 @@ export default class Propuesta_Extend extends Component {
             dialogVisible: false,
 
             //api
-            url: Api.api + '/propuesta/apoyar/',
+            url: Api.api + 'propuesta/apoyar/',
             token: '',
         };
     }
