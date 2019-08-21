@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Switch, ActivityIndicator, ToastAndroid } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Switch } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 import Icon from 'react-native-vector-icons/Ionicons';

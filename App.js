@@ -5,7 +5,12 @@ import { YellowBox } from 'react-native';
 import Navigator from './Navigator';
 import Perfil from './Opciones/Mas/User/Perfil'
 
-YellowBox.ignoreWarnings(['ViewPagerAndroid']);
+YellowBox.ignoreWarnings([
+  'ViewPagerAndroid',
+  'Warning: componentWillMount is deprecated',
+  'Warning: componentWillReceiveProps is deprecated',
+  'Module RCTImageLoader requires',
+]);
 
 export default class App extends Component {
 
