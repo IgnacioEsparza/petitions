@@ -155,7 +155,7 @@ class Propuestas_Main extends Component {
         return (PropuestasTipo[6].icon);
 
       default:
-        return (PropuestasTipo[7].icon);
+        return (PropuestasTipo[6].icon);
     }
   }
 

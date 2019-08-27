@@ -33,12 +33,7 @@ var categorias = [
         id: 6,
         category: 'Animales',
         icon: 'paw'
-    },
-    {
-        id: 7,
-        category: 'Uknown',
-        icon: 'file-question'
-    },
+    }
 ];
 
 module.exports = categorias;

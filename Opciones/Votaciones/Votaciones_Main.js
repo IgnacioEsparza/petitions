@@ -1,12 +1,20 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, View, Animated, TouchableOpacity, ScrollView, Text, ToastAndroid, FlatList } from 'react-native';
+import {
+    StyleSheet,
+    View,
+    RefreshControl,
+    TouchableOpacity,
+    ScrollView,
+    Text,
+    ToastAndroid,
+    FlatList
+} from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import Api from '../../Data/Api';
-import IncidenciaData from '../../Data/Propuestas';
 import PropuestasTipo from '../../Data/Categorias';
 import Colores from '../../Data/Global_Colors'
 
@@ -36,35 +44,98 @@ class Votaciones_Main extends Component {
     constructor() {
         super()
         this.state = {
-            list: IncidenciaData,
-            fullList: IncidenciaData,
             listType: PropuestasTipo,
             showDetail: false,
             proposalType: 'Filtrar Categoría',
 
             //Carga de datos de la api
             loading: false,
-            list: [],
             fullList: [],
-            url: Api.api + 'propuesta',
-            urlProp: Api.api + 'propuesta',
+            list: [],
+            url: Api.api + 'user',
             token: '',
         }
     }
 
+    componentDidMount = async () => {
+        this.getData();
+    }
+
+    // métodos para cargar datos del usuario.
+    //----------------------------------------------------
     getData = async () => {
 
+        await this.getToken();
         if (this.state.token == null || this.state.token == '') {
-            try {
-                var token = await AsyncStorage.getItem('token')
-                // console.log(token)
-                // this.setState({ token: token })
-            } catch (e) {
-                console.log(e)
-            }
-            this.setState({ token: token })
+            ToastAndroid.show('No has iniciado Sesión', ToastAndroid.SHORT)
+        } else {
+            await this.loadUserData();
         }
     }
+
+    getToken = async () => {
+        try {
+            var token = await AsyncStorage.getItem('token')
+            // console.log(token)
+            // this.setState({ token: token })
+        } catch (e) {
+            console.log(e)
+        }
+        this.setState({ token: token })
+    }
+
+    loadUserData = () => {
+
+        if (this.state.list.length == 0) {
+            fetch(this.state.url, {
+                method: 'get',
+                headers: {
+                    'Authorization': 'bearer ' + this.state.token
+                }
+            })
+                .then(res => res.json())
+                .then(res => {
+                    this.setState({
+                        list: res.user.propuestasApoyadas,
+                        fullList: res.user.propuestasApoyadas
+                    })
+                })
+        }
+    }
+
+    _onRefresh = async () => {
+        this.getData(); 
+        this.setState({ refreshing: true });
+        if (this.state.token == null || this.state.token == '') {
+            //ToastAndroid.show(this.state.token + " Token", ToastAndroid.SHORT)
+            this.setState({
+                list: [],
+                fullList: []
+            })
+            this.setState({ refreshing: false });
+        } else {
+            fetch(this.state.url, {
+                method: 'get',
+                headers: {
+                    'Authorization': 'bearer ' + this.state.token
+                }
+            })
+                .then(res => res.json())
+                .then(res => {
+                    this.setState({
+                        list: res.user.propuestasApoyadas,
+                        fullList: res.user.propuestasApoyadas,
+                        refreshing: false,
+                        proposalType: this.state.proposalType = 'Todos'
+                    })
+                    this.search(this.state.proposalType);
+                })//fin fetch
+
+        }
+        this.setState({ refreshing: false });
+    }
+
+    //--------------------------------------------------------
 
     search(txt) { // metodo de busqueda por categoría, verifica la existencia de propuestas por categoría
         var cont = 0;
@@ -90,50 +161,84 @@ class Votaciones_Main extends Component {
         this.setState({ showDetail: !this.state.showDetail });
     };
 
-    parseData = async () => {
+    categoria(category) {
+        switch (category) {
+            case PropuestasTipo[0].category:
+                return (PropuestasTipo[0].icon);
 
-        await this.getData();
+            case PropuestasTipo[1].category:
+                return (PropuestasTipo[1].icon);
+
+            case PropuestasTipo[2].category:
+                return (PropuestasTipo[2].icon);
+
+            case PropuestasTipo[3].category:
+                return (PropuestasTipo[3].icon);
+
+            case PropuestasTipo[4].category:
+                return (PropuestasTipo[4].icon);
+
+            case PropuestasTipo[5].category:
+                return (PropuestasTipo[5].icon);
+
+            case PropuestasTipo[6].category:
+                return (PropuestasTipo[6].icon);
+
+            default:
+                return (PropuestasTipo[6].icon);
+        }
+    }
+
+    parseData() {
+
+        //await this.getToken();
 
         if (this.state.list && !this.state.empty) {
-            return this.state.list.map((data, i) => {
+            return (
+                <View style={styles.FragmentStyle}>
+                    <FlatList
+                        data={this.state.list}
+                        renderItem={
+                            ({ item }) => {
+                                return (
+                                    <View item={item} parentFlatList={this} style={styles.listContainer} >
 
-                return (
+                                        < View style={styles.listStyleRow} >
+                                            <IconMaterial name={this.categoria(item.categoria)} color={blueColor} size={20} />
+                                            <Text style={styles.typePetitionStyle}>{item.categoria}</Text>
+                                        </View>
 
-                    <View key={i} style={styles.listContainer}>
+                                        <View style={styles.listStyle} >
+                                            <View style={{ height: lineHeight, width: "100%", backgroundColor: softGray }} />
+                                            <Text style={styles.titleTextStyle}>{item.title}</Text>
+                                            <View style={{ height: lineHeight, width: "60%", backgroundColor: softGray }} />
+                                            <Text style={styles.infoTextStyle}>{item.descripcion}</Text>
+                                            <View style={{ height: lineHeight, width: "100%", backgroundColor: softGray }} />
+                                        </View>
 
-                        < View style={styles.listStyleRow} >
-                            <IconMaterial name={data.icon} color={blueColor} size={20} />
-                            <Text style={styles.typePetitionStyle}>{data.categoria}</Text>
-                        </View>
+                                        <View style={styles.listStyleRowAdd}>
+                                            <Text style={styles.addInfoTextStyle}>
+                                                <IconMaterial name='account-multiple' color={blueColor} size={15} />
+                                                &nbsp;&nbsp;&nbsp;Votos: 99</Text>
+                                        </View>
 
-                        <View style={styles.listStyle} >
-                            <View style={{ height: lineHeight, width: "100%", backgroundColor: softGray }} />
-                            <Text style={styles.titleTextStyle}>{data.title}</Text>
-                            <View style={{ height: lineHeight, width: "100%", backgroundColor: softGray }} />
-                        </View>
+                                        <TouchableOpacity onPress={() => { this.props.navigation.navigate('Vot', { data: item }) }}
+                                            style={styles.buttonListStyles}>
+                                        </TouchableOpacity >
 
-                        < View style={styles.RowContainer} >
-                            <View style={styles.listStyleRowAdd}>
-                                <Text style={styles.addInfoTextStyle}>
-                                    <IconMaterial name='account-multiple' color={blueColor} size={15} />
-                                    &nbsp;&nbsp;&nbsp;Votos: 99</Text>
-                            </View>
-                        </View>
+                                    </View >
+                                );
+                            }
+                        }
+                        keyExtractor={(item, index) => index.toString()} />
 
-                        <TouchableOpacity onPress={() => { this.props.navigation.navigate('Vot', { data: data }) }}
-                            style={styles.buttonListStyles}>
-                        </TouchableOpacity >
-
-                    </View >
-
-                )
-            })
+                </View>)
         } else {
             return (
                 <View style={{ flex: 1, alignItems: 'center' }}>
                     <View style={{ height: lineHeight, width: "90%", backgroundColor: softGray, marginBottom: 10, marginTop: 5 }} ></View>
                     <View style={styles.textContainer}>
-                        <Text style={styles.labelStyle}>No existen propuestas en esta categoría actualmente</Text>
+                        <Text style={styles.labelStyle}>Nada que mostrar</Text>
                     </View>
                 </View>
             )
@@ -179,7 +284,7 @@ class Votaciones_Main extends Component {
         return (
             <View style={styles.MainContainer}>
                 <View style={styles.FragmentStyle}>
-                    <ScrollView>
+                    <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh} />}>
                         {this.selectType()}
                         <View>
                             {this.parseData()}
