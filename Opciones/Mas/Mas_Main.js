@@ -9,6 +9,8 @@ import Dialog from "react-native-dialog";
 import Colores from '../../Data/Global_Colors';
 import Api from '../../Data/Api';
 
+import VotacionesClass from '../Votaciones/Votaciones_Main';
+
 var grayColor = Colores.grayColor;
 var blueColor = Colores.blueColor;
 var whiteColor = Colores.whiteColor;
@@ -121,14 +123,6 @@ class Mas_Main extends Component {
     this.loadUser();
 
     var iconSize = 20;
-
-    // if (this.state.loading) {
-    //   return (
-    //     <View style={[styles.containerIndicator, styles.horizontalIndicator]}>
-    //       <ActivityIndicator size={80} color={blueColor} />
-    //     </View>
-    //   );
-    // }
 
     return (
       <View style={styles.MainContainer}>
@@ -287,6 +281,7 @@ import Acerca_de from './Acerca_De';
 import Informacion from './Informacion';
 import Perfil from './User/Perfil';
 
+
 const AppNavigator = createStackNavigator({
   Mas: { screen: Mas_Main },
   Account: { screen: Account_nav },
@@ -295,6 +290,7 @@ const AppNavigator = createStackNavigator({
   Acerca: { screen: Acerca_de },
   Info: { screen: Informacion },
   Perfil: { screen: Perfil }
+
 });
 
 export default createAppContainer(AppNavigator);

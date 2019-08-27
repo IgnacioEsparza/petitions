@@ -57,6 +57,13 @@ class Votaciones_Main extends Component {
         }
     }
 
+    // shouldComponentUpdate(nextProps, nextState){
+    //    if(this.props.close !== nextProps.close){
+    //         return true;
+    //    }
+    //    return false;
+    //  }
+
     componentDidMount = async () => {
         this.getData();
     }
@@ -104,7 +111,7 @@ class Votaciones_Main extends Component {
     }
 
     _onRefresh = async () => {
-        this.getData(); 
+        await this.getData();
         this.setState({ refreshing: true });
         if (this.state.token == null || this.state.token == '') {
             //ToastAndroid.show(this.state.token + " Token", ToastAndroid.SHORT)
@@ -190,8 +197,6 @@ class Votaciones_Main extends Component {
     }
 
     parseData() {
-
-        //await this.getToken();
 
         if (this.state.list && !this.state.empty) {
             return (

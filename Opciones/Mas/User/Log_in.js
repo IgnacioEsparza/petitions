@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Colores from '../../../Data/Global_Colors';
 import Api from '../../../Data/Api';
 
+import VotacionesClass from '../../Votaciones/Votaciones_Main';
 
 var grayColor = Colores.grayColor;
 var blueColor = Colores.blueColor;
