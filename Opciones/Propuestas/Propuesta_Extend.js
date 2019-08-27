@@ -37,11 +37,12 @@ export default class Propuesta_Extend extends Component {
         this.state = {
             vote: true,
             pressUp: false,
-            pressDown: false,
+            //pressDown: false,
             dialogVisible: false,
 
             //api
-            url: Api.api + 'propuesta/apoyar/',
+            urlAdd: Api.api + 'propuesta/apoyar/',
+            urlRed: Api.api + 'propuesta/cancelar/',
             token: '',
         };
     }
@@ -55,7 +56,11 @@ export default class Propuesta_Extend extends Component {
         if (!this.state.token) {
             this.setState({ dialogVisible: true });
         } else {
-            this.addPropuesta(idpro);
+            if (!this.state.pressUp) {
+                this.addPropuesta(idpro);
+            } else {
+                this.reducePropuesta(idpro);
+            }
             this.votingUp();
         }
     }
@@ -73,10 +78,11 @@ export default class Propuesta_Extend extends Component {
     //---------------------------------------------
     votingUp = () => {
         this.setState({ vote: !this.state.vote, pressUp: !this.state.pressUp });
-
-        if (this.state.pressDown) {
-            this.setState({ vote: !this.state.vote, pressDown: !this.state.pressDown });
-        }
+        // Valor inicial pressDown false, nunca se cumple if
+        // Considerar eliminar state, nunca se utilza
+        // if (this.state.pressDown) {
+        //     this.setState({ vote: !this.state.vote, pressDown: !this.state.pressDown });
+        // }
     }
 
     // votingDown = () => {
@@ -100,16 +106,18 @@ export default class Propuesta_Extend extends Component {
         this.setState({ token: token })
     }
 
+    //---------------------------------------------
+
     addPropuesta = async (idpro) => {
 
-        fetch(this.state.url + idpro, {
+        fetch(this.state.urlAdd + idpro, {
             method: 'put',
             headers: {
                 'Authorization': 'bearer ' + this.state.token
             }
         })
             .then(res => {
-                if (res.status == 200) {
+                if (res.status == 201) {
                     ToastAndroid.show('Propuesta Apoyada', ToastAndroid.SHORT)
                 } else {
                     if (res.status == 404) {
@@ -119,6 +127,30 @@ export default class Propuesta_Extend extends Component {
             });
 
     }
+
+    //---------------------------------------------
+
+    reducePropuesta = async (idpro) => {
+
+        fetch(this.state.urlRed + idpro, {
+            method: 'put',
+            headers: {
+                'Authorization': 'bearer ' + this.state.token
+            }
+        })
+            .then(res => {
+                if (res.status == 200) {
+                    ToastAndroid.show('Ya no estas apoyando esta propuesta', ToastAndroid.SHORT)
+                } else {
+                    if (res.status == 403) {
+                        ToastAndroid.show('Esta propuesta no es apoyada actualmente', ToastAndroid.SHORT)
+                    }
+                }
+            });
+
+    }
+
+    //---------------------------------------------
 
     render() {
         var proposal = this.props.navigation.state.params.data;
@@ -188,6 +220,8 @@ export default class Propuesta_Extend extends Component {
         );
     }
 }
+
+//---------------------------------------------
 
 const tam = 1.2;
 const styles = StyleSheet.create({
